@@ -1,10 +1,13 @@
 package com.example.chayenjr.digiowallet;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.TextView;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -40,6 +43,15 @@ public class LoginRegister extends AppCompatActivity {
 
         setContentView(R.layout.activity_login_register);
 
+        TextView create_account = (TextView)findViewById(R.id.create_new_account);
+        create_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginRegister.this, RegisterPage.class);
+                startActivity(intent);
+//                finish();
+            }
+        });
         mVisible = true;
     }
 
