@@ -34,6 +34,13 @@ public class RegisterPage extends AppCompatActivity {
                     }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
                     check_register_page = 2;
                 } else{
+                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
+                    if (fragment instanceof CreatePINCode == false) {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.register_info, CreatePINCode.newInstance(), "PIN code Page")
+                                .addToBackStack(null)
+                                .commit();
+                    }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }
         });
