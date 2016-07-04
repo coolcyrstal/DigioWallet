@@ -5,8 +5,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -59,13 +57,13 @@ public class LoginRegister extends AppCompatActivity {
         }
         mVisible = false;
 
-        Button dummy = (Button)findViewById(R.id.dummy_button);
-        dummy.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                show();
-            }
-        });
+//        Button dummy = (Button)findViewById(R.id.dummy_button);
+//        dummy.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                show();
+//            }
+//        });
         // Schedule a runnable to remove the status and navigation bar after a delay
         mHideHandler.removeCallbacks(mShowPart2Runnable);
     }
