@@ -12,67 +12,73 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="5dp"
-        android:id="@+id/userinfo"
-        android:background="#FFF">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/textFirstname"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:textColorHighlight="@android:color/holo_blue_bright"
-            android:textColorHint="@android:color/holo_blue_bright"
-            android:textColor="@android:color/holo_blue_bright"
-            android:hint="Firstname" />
+        android:layout_height="match_parent"
+        android:id="@+id/register_info">
 
-        <EditText
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/textLastname"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:textColorHighlight="@android:color/holo_blue_bright"
-            android:textColorHint="@android:color/holo_blue_bright"
-            android:textColor="@android:color/holo_blue_bright"
-            android:hint="Lastname"
-            android:layout_below="@+id/textFirstname"/>
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="5dp"
+            android:id="@+id/userinfo"
+            android:background="#FFF">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/textFirstname"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textColorHighlight="@android:color/holo_blue_bright"
+                android:textColorHint="@android:color/holo_blue_bright"
+                android:textColor="@android:color/holo_blue_bright"
+                android:hint="Firstname" />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/textCitizenID"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:textColorHighlight="@android:color/holo_blue_bright"
-            android:textColorHint="@android:color/holo_blue_bright"
-            android:textColor="@android:color/holo_blue_bright"
-            android:hint="Citizen ID"
-            android:layout_below="@+id/textLastname"
-            android:layout_marginBottom="10dp"/>
-    </RelativeLayout>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/textLastname"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textColorHighlight="@android:color/holo_blue_bright"
+                android:textColorHint="@android:color/holo_blue_bright"
+                android:textColor="@android:color/holo_blue_bright"
+                android:hint="Lastname"
+                android:layout_below="@+id/textFirstname"/>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="20dp"
-        android:id="@+id/user_mobileinfo"
-        android:background="#FFF"
-        android:layout_below="@+id/userinfo">
-        <EditText
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/textCitizenID"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:textColorHighlight="@android:color/holo_blue_bright"
+                android:textColorHint="@android:color/holo_blue_bright"
+                android:textColor="@android:color/holo_blue_bright"
+                android:hint="Citizen ID"
+                android:layout_below="@+id/textLastname"
+                android:layout_marginBottom="10dp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:id="@+id/text_createMobileNum"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            android:textColorHighlight="@android:color/holo_blue_bright"
-            android:textColorHint="@android:color/holo_blue_bright"
-            android:textColor="@android:color/holo_blue_bright"
-            android:hint="Mobile No." />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:id="@+id/user_mobileinfo"
+            android:background="#FFF"
+            android:layout_below="@+id/userinfo">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:id="@+id/text_createMobileNum"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:textColorHighlight="@android:color/holo_blue_bright"
+                android:textColorHint="@android:color/holo_blue_bright"
+                android:textColor="@android:color/holo_blue_bright"
+                android:hint="Mobile No." />
+        </RelativeLayout>
     </RelativeLayout>
 
     <LinearLayout

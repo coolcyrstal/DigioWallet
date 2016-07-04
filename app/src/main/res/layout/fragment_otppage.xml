@@ -1,0 +1,75 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/otpcheckpage"
+    tools:context="com.example.chayenjr.digiowallet.RegisterPage">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Please enter OTP Code that was send to your mobile no and will expire within 10 minutes."
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:id="@+id/textotp1"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="086 *** 4567"
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:id="@+id/mobileNum_otp"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"
+            android:layout_below="@+id/textotp1"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:id="@+id/text_otpcode"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:textColorHighlight="#999"
+            android:textColorHint="#999"
+            android:textColor="#999"
+            android:layout_below="@+id/mobileNum_otp"
+            android:hint="OTP Code" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="290dp"
+        android:layout_gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="If you don't get SMS OTP please check your mobile no or request SMS OTP again."
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:id="@+id/textotp_notreceive"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center" />
+    </RelativeLayout>
+</FrameLayout>
