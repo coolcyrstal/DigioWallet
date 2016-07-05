@@ -1,4 +1,4 @@
-package com.example.chayenjr.digiowallet;
+package com.example.chayenjr.digiowallet.register;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+
+import com.example.chayenjr.digiowallet.R;
 
 public class RegisterPage extends AppCompatActivity {
 

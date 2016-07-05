@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.chayenjr.digiowallet.RegisterPage"
+    tools:context=".register.RegisterPage"
     android:background="#DDD">
 
     <RelativeLayout
@@ -28,9 +28,9 @@
                 android:id="@+id/textFirstname"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:textColorHighlight="@android:color/holo_blue_bright"
-                android:textColorHint="@android:color/holo_blue_bright"
-                android:textColor="@android:color/holo_blue_bright"
+                android:textColorHighlight="#777"
+                android:textColorHint="#777"
+                android:textColor="#777"
                 android:hint="Firstname" />
 
             <EditText
@@ -39,9 +39,9 @@
                 android:id="@+id/textLastname"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:textColorHighlight="@android:color/holo_blue_bright"
-                android:textColorHint="@android:color/holo_blue_bright"
-                android:textColor="@android:color/holo_blue_bright"
+                android:textColorHighlight="#777"
+                android:textColorHint="#777"
+                android:textColor="#777"
                 android:hint="Lastname"
                 android:layout_below="@+id/textFirstname"/>
 
@@ -51,9 +51,9 @@
                 android:id="@+id/textCitizenID"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
-                android:textColorHighlight="@android:color/holo_blue_bright"
-                android:textColorHint="@android:color/holo_blue_bright"
-                android:textColor="@android:color/holo_blue_bright"
+                android:textColorHighlight="#777"
+                android:textColorHint="#777"
+                android:textColor="#777"
                 android:hint="Citizen ID"
                 android:layout_below="@+id/textLastname"
                 android:layout_marginBottom="10dp"/>
@@ -74,9 +74,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                android:textColorHighlight="@android:color/holo_blue_bright"
-                android:textColorHint="@android:color/holo_blue_bright"
-                android:textColor="@android:color/holo_blue_bright"
+                android:textColorHighlight="#777"
+                android:textColorHint="#777"
+                android:textColor="#777"
                 android:hint="Mobile No." />
         </RelativeLayout>
     </RelativeLayout>

@@ -1,12 +1,15 @@
-package com.example.chayenjr.digiowallet;
+package com.example.chayenjr.digiowallet.register;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.example.chayenjr.digiowallet.R;
 import com.mhk.android.passcodeview.PasscodeView;
 
 
@@ -38,11 +41,14 @@ public class CreatePINCode extends Fragment {
         View view = inflater.inflate(R.layout.fragment_create_pincode, container, false);
 
         PasscodeView passcodeView = (PasscodeView)view.findViewById(R.id.passcode_view);
+        InputMethodManager inputMethodManager = (InputMethodManager) getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+        passcodeView.requestToShowKeyboard();
         passcodeView.setPasscodeEntryListener(new PasscodeView.PasscodeEntryListener() {
             @Override
             public void onPasscodeEntered(String passcode) {
                 Toast.makeText(getActivity().getApplicationContext(), "Passcode entered: " + passcode, Toast.LENGTH_SHORT).show();
-                getActivity().finish();
                 Fragment fragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.register_info);
                 if (fragment instanceof ConfirmPINCode == false) {
                     getActivity().getSupportFragmentManager().beginTransaction()
