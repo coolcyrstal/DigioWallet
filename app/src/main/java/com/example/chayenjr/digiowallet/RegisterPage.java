@@ -20,7 +20,7 @@ public class RegisterPage extends AppCompatActivity {
         getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
         getSupportActionBar().setCustomView(R.layout.register_actionbar);
 
-        Button nextbutton = (Button)findViewById(R.id.nextbutton);
+        final Button nextbutton = (Button)findViewById(R.id.nextbutton);
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -40,6 +40,7 @@ public class RegisterPage extends AppCompatActivity {
                                 .replace(R.id.register_info, CreatePINCode.newInstance(), "PIN code Page")
                                 .addToBackStack(null)
                                 .commit();
+                        nextbutton.setVisibility(View.INVISIBLE);
                     }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
                 }
             }

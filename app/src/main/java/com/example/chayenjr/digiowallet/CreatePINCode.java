@@ -41,11 +41,17 @@ public class CreatePINCode extends Fragment {
         passcodeView.setPasscodeEntryListener(new PasscodeView.PasscodeEntryListener() {
             @Override
             public void onPasscodeEntered(String passcode) {
-                
                 Toast.makeText(getActivity().getApplicationContext(), "Passcode entered: " + passcode, Toast.LENGTH_SHORT).show();
                 getActivity().finish();
+                Fragment fragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.register_info);
+                if (fragment instanceof ConfirmPINCode == false) {
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.register_info, ConfirmPINCode.newInstance(), "Confirm PIN code page")
+                            .addToBackStack(null)
+                            .commit();
+                }else Toast.makeText(getActivity().getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
         });
-        return inflater.inflate(R.layout.fragment_create_pincode, container, false);
+        return view;
     }
 }
