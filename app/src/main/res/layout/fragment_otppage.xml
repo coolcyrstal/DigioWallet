@@ -71,5 +71,16 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="10dp"
             android:textAlignment="center" />
+
+        <Button
+            android:id="@+id/reqOTPbutton"
+            android:layout_below="@+id/textotp_notreceive"
+            android:layout_centerHorizontal="true"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="REQUEST OTP"
+            android:background="#CCC"
+            android:textColor="#000"
+            android:layout_gravity="bottom"/>
     </RelativeLayout>
 </FrameLayout>

@@ -1,5 +1,7 @@
 package com.example.chayenjr.digiowallet.register;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBar;
@@ -8,15 +10,12 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -32,7 +31,9 @@ public class RegisterPage extends AppCompatActivity {
     EditText textFirstName;
     EditText textLastName;
     EditText textCitizenID;
-    EditText textCreateMobileNum;
+    static EditText textCreateMobileNum;
+    Button nextbutton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,42 +47,46 @@ public class RegisterPage extends AppCompatActivity {
         textLastName = (EditText)findViewById(R.id.textLastname);
         textCitizenID = (EditText)findViewById(R.id.textCitizenID);
         textCreateMobileNum = (EditText)findViewById(R.id.text_createMobileNum);
+        nextbutton = (Button)findViewById(R.id.nextbutton);
 
-        final Button nextbutton = (Button)findViewById(R.id.nextbutton);
+
         nextbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(check_register_page == 1){
-                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
-                    if (fragment instanceof OTPpage == false) {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.register_info, OTPpage.newInstance(), "OTP Page")
-                                .addToBackStack(null)
-                                .commit();
-                        sendToDB(v);
-                    }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
-                    check_register_page = 2;
+                if(textFirstName.getText().toString().equals("") || textLastName.getText().toString().equals("")
+                        || textCitizenID.getText().toString().equals("") || textCreateMobileNum.getText().toString().equals("")){
+                    checkAccountInfo(RegisterPage.this, "Your information not complete", "Please input all field.", "OK");
                 } else{
-                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
-                    if (fragment instanceof CreatePINCode == false) {
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.register_info, CreatePINCode.newInstance(), "PIN code Page")
-                                .addToBackStack(null)
-                                .commit();
-                        nextbutton.setVisibility(View.INVISIBLE);
-                    }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
+                    goCreateAccount();
                 }
             }
         });
     }
 
-    private void sendToDB(View v){
-        HttpService api = HttpService.getInstance();
-        Log.d("send", textFirstName.getText().toString() + textLastName.getText().toString() +
-                textCitizenID.getText().toString() + textCreateMobileNum.getText().toString() + ":" +
-                HttpService.RegisterContact.getNonce() + ":" + HttpService.RegisterContact.getVersions());
+    private void goCreateAccount(){
+        if(check_register_page == 1){
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
+            if (fragment instanceof OTPpage == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.register_info, OTPpage.newInstance(), "OTP Page")
+                        .addToBackStack(null)
+                        .commit();
+                sendCreateAccount();
+            }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
+            check_register_page = 2;
+        } else{
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
+            if (fragment instanceof CreatePINCode == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.register_info, CreatePINCode.newInstance(), "PIN code Page")
+                        .addToBackStack(null)
+                        .commit();
+                nextbutton.setVisibility(View.INVISIBLE);
+            }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-        final Map<String, String> headers = new HashMap<String, String>();
+    private void sendCreateAccount(){
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
         OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
@@ -92,35 +97,16 @@ public class RegisterPage extends AppCompatActivity {
                 .build();
         HttpService.service = retrofit.create(HttpService.HttpBinService.class);
 
-        Call<HttpService.HttpBinResponse> call = HttpService.service.postWithFormJson_createAccount(textFirstName.getText().toString(), textLastName.getText().toString(),
+        Call<HttpService.HttpBinResponse> call_createAccount = HttpService.service.postWithFormJson_createAccount(
+                textFirstName.getText().toString(), textLastName.getText().toString(),
                 textCitizenID.getText().toString(), textCreateMobileNum.getText().toString(), HttpService.RegisterContact.getNonce(),
                 HttpService.RegisterContact.getVersions());
 
-//        Call<HttpService.HttpBinResponse> call = HttpService.service.postWithFormJson(textCreateMobileNum.getText().toString(), HttpService.RegisterContact.getNonce(),
-//                HttpService.RegisterContact.getVersions());
-
         // Asynchronously execute HTTP request
-        call.enqueue(new Callback<HttpService.HttpBinResponse>() {
+        call_createAccount.enqueue(new Callback<HttpService.HttpBinResponse>() {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
-                Log.d("Response code: ", "" + response.body().toString());
-//                Toast.makeText(RegisterPage.this, "Response code: " + response.body().toString(), Toast.LENGTH_SHORT).show();
-                ((TextView)findViewById(R.id.textotp_notreceive)).setText("Response code: ");
-                // isSuccess is true if response code => 200 and <= 300
-                if (!response.isSuccessful()) {
-                    // print response body if unsuccessful
-                    try {
-                        Log.d("success", response.errorBody().string());
-                    } catch (IOException e) {
-                        // do nothing
-                        Log.d("fail", "555");
-                    }
-                    return;
-                }
-
-                // if parsing the JSON body failed, `response.body()` returns null
-                HttpService.HttpBinResponse decodedResponse = response.body();
-                if (decodedResponse == null) return;
+                doSomething(response);
             }
 
             @Override
@@ -128,5 +114,55 @@ public class RegisterPage extends AppCompatActivity {
                 Log.d("onFailure", t.getMessage());
             }
         });
+
+        requestOTP();
+    }
+
+    private void doSomething(Response<HttpService.HttpBinResponse> response){
+//        Toast.makeText(RegisterPage.this, "Response code: " + response.body().toString(), Toast.LENGTH_SHORT).show();
+//        ((TextView)findViewById(R.id.textotp_notreceive)).setText("Success : "
+//                + response.body().getSuccess() + "Error code: " + response.body().getError_code());
+        if (!response.isSuccessful()) {
+            // print response body if unsuccessful
+            try {
+                Log.d("success", response.errorBody().string());
+            } catch (IOException e) {
+                // do nothing
+                Log.d("fail", "555");
+            }
+            return;
+        }
+        // if parsing the JSON body failed, `response.body()` returns null
+        HttpService.HttpBinResponse decodedResponse = response.body();
+        if (decodedResponse == null) return;
+    }
+
+    protected static void requestOTP(){
+        Call<HttpService.HttpBinResponse> call_reqOTP = HttpService.service.postWithFormJson_reqOTP(
+                textCreateMobileNum.getText().toString(), HttpService.RegisterContact.getVersions(),
+                HttpService.RegisterContact.getNonce());
+
+        call_reqOTP.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private AlertDialog checkAccountInfo(final AppCompatActivity act, CharSequence title,
+                                                    CharSequence message, CharSequence buttonYes){
+        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(act);
+        downloadDialog.setTitle(title).setMessage(message).setPositiveButton(buttonYes, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        return downloadDialog.show();
     }
 }

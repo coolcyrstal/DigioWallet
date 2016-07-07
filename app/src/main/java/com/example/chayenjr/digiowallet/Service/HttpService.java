@@ -43,31 +43,26 @@ public class HttpService {
      * Generic HttpBin.org Response Container
      */
     public static class HttpBinResponse {
-        Boolean success;
-        String error_code;
 
-        public boolean getSuccess(){
+        @SerializedName("success") private Boolean success;
+        @SerializedName("error_code") private String error_code;
+        @SerializedName("ref_OTP") private String ref_OTP;
+
+        public Boolean getSuccess() {
             return success;
+        }
+
+        public void setSuccess(Boolean success) {
+            this.success = success;
+        }
+
+        public void setError_code(String error_code) {
+            this.error_code = error_code;
         }
 
         public String getError_code(){
             return error_code;
         }
-//        String firstname;
-//        String lastname;
-//        String mobile;
-//        String card_id;
-//        String nonce;
-//        String versions;
-//
-//        public HttpBinResponse(String firstname, String lastname, String mobile, String card_id, String nonce, String versions) {
-//            this.firstname = firstname;
-//            this.lastname = lastname;
-//            this.mobile = mobile;
-//            this.card_id = card_id;
-//            this.nonce = nonce;
-//            this.versions = versions;
-//        }
     }
 
     public static class RegisterContact {
@@ -123,12 +118,13 @@ public class HttpService {
      */
     public interface HttpBinService {
         @GET("mobile_register")
-        Call<HttpBinResponse> get();
+        Call<HttpBinResponse> getSuccess();
 
         // request /get?testArg=...
         @GET("mobile_register")
-        Call<HttpBinResponse> getWithArg(
-                @Query("testArg") String arg
+        Call<HttpBinResponse> getWithJson(
+                @Query("success") Boolean success,
+                @Query("error_code") String error_code
         );
 
         // POST form encoded with form field params
@@ -141,6 +137,14 @@ public class HttpService {
                 @Field("mobile") String mobile,
                 @Field("nonce") String nonce,
                 @Field("versions") String versions
+        );
+
+        @FormUrlEncoded
+        @POST("mobile_reqOTP")
+        Call<HttpBinResponse> postWithFormJson_reqOTP(
+                @Field("mobile") String mobile,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
         );
 
         // POST with a JSON body
