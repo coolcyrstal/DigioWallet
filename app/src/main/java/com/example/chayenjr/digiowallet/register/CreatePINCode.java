@@ -17,6 +17,7 @@ public class CreatePINCode extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    public static String check_passcode;
 
     public CreatePINCode() {
         // Required empty public constructor
@@ -49,6 +50,7 @@ public class CreatePINCode extends Fragment {
             @Override
             public void onPasscodeEntered(String passcode) {
                 Toast.makeText(getActivity().getApplicationContext(), "Passcode entered: " + passcode, Toast.LENGTH_SHORT).show();
+                check_passcode = passcode;
                 Fragment fragment = getActivity().getSupportFragmentManager().findFragmentById(R.id.register_info);
                 if (fragment instanceof ConfirmPINCode == false) {
                     getActivity().getSupportFragmentManager().beginTransaction()

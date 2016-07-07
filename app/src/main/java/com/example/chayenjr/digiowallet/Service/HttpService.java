@@ -160,6 +160,15 @@ public class HttpService {
                 @Field("nonce") String nonce
         );
 
+        @FormUrlEncoded
+        @POST("mobile_pin")
+        Call<HttpBinResponse> postWithFormJson_pin(
+                @Field("pin") String pin,
+                @Field("mobile") String mobile,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
         // POST with a JSON body
         @POST("mobile_register")
         Call<HttpBinResponse> postWithJson(
