@@ -46,7 +46,7 @@ public class HttpService {
 
         @SerializedName("success") private Boolean success;
         @SerializedName("error_code") private String error_code;
-        @SerializedName("ref_OTP") private String ref_OTP;
+        @SerializedName("ref_otp") private String ref_otp;
 
         public Boolean getSuccess() {
             return success;
@@ -62,6 +62,10 @@ public class HttpService {
 
         public String getError_code(){
             return error_code;
+        }
+
+        public String getRef_OTP() {
+            return ref_otp;
         }
     }
 
@@ -143,6 +147,15 @@ public class HttpService {
         @POST("mobile_reqOTP")
         Call<HttpBinResponse> postWithFormJson_reqOTP(
                 @Field("mobile") String mobile,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        @FormUrlEncoded
+        @POST("mobile_verifyOTP")
+        Call<HttpBinResponse> postWithFormJson_verifyOTP(
+                @Field("ref_otp") String ref_otp,
+                @Field("otp") String otp,
                 @Field("versions") String versions,
                 @Field("nonce") String nonce
         );

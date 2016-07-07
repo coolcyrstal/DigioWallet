@@ -33,6 +33,7 @@ public class RegisterPage extends AppCompatActivity {
     EditText textCitizenID;
     static EditText textCreateMobileNum;
     Button nextbutton;
+    static String verify_check_OTP;
 
 
     @Override
@@ -75,14 +76,8 @@ public class RegisterPage extends AppCompatActivity {
             }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
             check_register_page = 2;
         } else{
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
-            if (fragment instanceof CreatePINCode == false) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.register_info, CreatePINCode.newInstance(), "PIN code Page")
-                        .addToBackStack(null)
-                        .commit();
-                nextbutton.setVisibility(View.INVISIBLE);
-            }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RegisterPage.this, OTPpage.getOTPText(), Toast.LENGTH_SHORT).show();
+            verifyOTP();
         }
     }
 
@@ -145,7 +140,37 @@ public class RegisterPage extends AppCompatActivity {
         call_reqOTP.enqueue(new Callback<HttpService.HttpBinResponse>() {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                verify_check_OTP = response.body().getRef_OTP();
+            }
 
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void verifyOTP(){
+        Call<HttpService.HttpBinResponse> call_verifyOTP = HttpService.service.postWithFormJson_verifyOTP(
+                verify_check_OTP, OTPpage.getOTPText(), HttpService.RegisterContact.getVersions(),
+                HttpService.RegisterContact.getNonce());
+
+        call_verifyOTP.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                Toast.makeText(RegisterPage.this, ""+response.body().getSuccess(), Toast.LENGTH_SHORT).show();
+                if(response.body().getSuccess()){
+                    Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
+                    if (fragment instanceof CreatePINCode == false) {
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.register_info, CreatePINCode.newInstance(), "PIN code Page")
+                                .addToBackStack(null)
+                                .commit();
+                        nextbutton.setVisibility(View.INVISIBLE);
+                    }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
+                } else{
+                    checkAccountInfo(RegisterPage.this, "OTP Incorrect", "Please type otp again.", "OK");
+                }
             }
 
             @Override
