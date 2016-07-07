@@ -15,8 +15,6 @@ import android.widget.Toast;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 
-import java.io.IOException;
-
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
@@ -66,15 +64,7 @@ public class RegisterPage extends AppCompatActivity {
 
     private void goCreateAccount(){
         if(check_register_page == 1){
-            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
-            if (fragment instanceof OTPpage == false) {
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.register_info, OTPpage.newInstance(), "OTP Page")
-                        .addToBackStack(null)
-                        .commit();
-                sendCreateAccount();
-            }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
-            check_register_page = 2;
+            sendCreateAccount();
         } else{
             Toast.makeText(RegisterPage.this, OTPpage.getOTPText(), Toast.LENGTH_SHORT).show();
             verifyOTP();
@@ -101,7 +91,7 @@ public class RegisterPage extends AppCompatActivity {
         call_createAccount.enqueue(new Callback<HttpService.HttpBinResponse>() {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
-                doSomething(response);
+                createAccount(response);
             }
 
             @Override
@@ -109,27 +99,22 @@ public class RegisterPage extends AppCompatActivity {
                 Log.d("onFailure", t.getMessage());
             }
         });
-
-        requestOTP();
     }
 
-    private void doSomething(Response<HttpService.HttpBinResponse> response){
-//        Toast.makeText(RegisterPage.this, "Response code: " + response.body().toString(), Toast.LENGTH_SHORT).show();
-//        ((TextView)findViewById(R.id.textotp_notreceive)).setText("Success : "
-//                + response.body().getSuccess() + "Error code: " + response.body().getError_code());
-        if (!response.isSuccessful()) {
-            // print response body if unsuccessful
-            try {
-                Log.d("success", response.errorBody().string());
-            } catch (IOException e) {
-                // do nothing
-                Log.d("fail", "555");
-            }
-            return;
+    private void createAccount(Response<HttpService.HttpBinResponse> response){
+        if(response.body().getSuccess()){
+            Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.register_info);
+            if (fragment instanceof OTPpage == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.register_info, OTPpage.newInstance(), "OTP Page")
+                        .addToBackStack(null)
+                        .commit();
+            }else Toast.makeText(RegisterPage.this, "Error", Toast.LENGTH_SHORT).show();
+            check_register_page = 2;
+            requestOTP();
+        } else{
+            checkAccountInfo(RegisterPage.this, "Your citizen_id has already use", "Please check your citizen_id and type again.", "OK");
         }
-        // if parsing the JSON body failed, `response.body()` returns null
-        HttpService.HttpBinResponse decodedResponse = response.body();
-        if (decodedResponse == null) return;
     }
 
     protected static void requestOTP(){
