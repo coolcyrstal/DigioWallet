@@ -22,7 +22,8 @@
         android:text="name"
         android:textSize="24sp"
         android:textColor="@android:color/black"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+        android:singleLine="true"
+        android:ellipsize="end"/>
 
     <TextView
         android:id="@+id/account_citizen_id"
