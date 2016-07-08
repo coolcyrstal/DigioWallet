@@ -8,11 +8,16 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatTextView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
+import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
+
+import org.json.JSONException;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Toolbar mToolbar;
@@ -20,6 +25,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     AppCompatTextView mTextviewName, mTextViewMoney;
+    TextView account_name, account_citizen_id;
+    View view;
 
 
     @Override
@@ -29,7 +36,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         initialize();
         setToolbar();
         setDrawer();
-
     }
 
     private void initialize() {
@@ -38,6 +44,23 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         mTextviewName = (AppCompatTextView) findViewById(R.id.username);
         mTextViewMoney = (AppCompatTextView) findViewById(R.id.user_money);
+        view = navigationView.getHeaderView(0);
+
+        account_name = (TextView)view.findViewById(R.id.account_name);
+        account_citizen_id = (TextView)view.findViewById(R.id.account_citizen_id);
+        Log.d("show", LoginRegister.account_info.getF_NAME());
+        try {
+            setAccountInfo();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setAccountInfo() throws JSONException {
+        account_name.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
+        account_citizen_id.setText(LoginRegister.account_info.getCard_id().substring(0, 4) + "*****"
+                                    + LoginRegister.account_info.getCard_id()
+                                        .substring(LoginRegister.account_info.getCard_id().length() - 4, LoginRegister.account_info.getCard_id().length()));
     }
 
     private void setToolbar() {

@@ -1,5 +1,6 @@
 package com.example.chayenjr.digiowallet.Service;
 
+import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -48,6 +49,8 @@ public class HttpService {
         @SerializedName("error_code") private String error_code;
         @SerializedName("ref_otp") private String ref_otp;
         @SerializedName("token") private String token;
+        @SerializedName("details") private AccountDetails details;
+
 
         public Boolean getSuccess() {
             return success;
@@ -71,6 +74,14 @@ public class HttpService {
 
         public String getToken() {
             return token;
+        }
+
+        public AccountDetails getDetails() {
+            return details;
+        }
+
+        public void setDetails(AccountDetails details) {
+            this.details = details;
         }
     }
 

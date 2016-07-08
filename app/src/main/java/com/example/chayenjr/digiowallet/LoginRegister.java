@@ -8,12 +8,14 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.Main.HomePage;
+import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 import com.example.chayenjr.digiowallet.register.RegisterPage;
 
@@ -55,6 +57,7 @@ public class LoginRegister extends AppCompatActivity {
     EditText text_mobileNum;
     EditText text_PIN;
     String check_token;
+    public static AccountDetails account_info;
 
 
     @Override
@@ -107,8 +110,11 @@ public class LoginRegister extends AppCompatActivity {
         call_login.enqueue(new Callback<HttpService.HttpBinResponse>() {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                Log.d("Check success", ""+response.body().getSuccess());
                 if(response.body().getSuccess()){
                     check_token = response.body().getToken();
+                    account_info = response.body().getDetails();
+
                     Intent intent = new Intent(LoginRegister.this, HomePage.class);
                     startActivity(intent);
                 } else{
@@ -118,7 +124,7 @@ public class LoginRegister extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
-                checkLoginInfo(LoginRegister.this, "Mobile num or password incorrect", "Please type again.", "OK");
+                checkLoginInfo(LoginRegister.this, "Fail", "Please type again.", "OK");
             }
         });
     }
