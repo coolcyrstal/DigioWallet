@@ -37,6 +37,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     private void setToolbar() {
         setSupportActionBar(mToolbar);
+        getSupportActionBar().setTitle("");
         mToolbar.setTitle("");
     }
     private void setDrawer() {
