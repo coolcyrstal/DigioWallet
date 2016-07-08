@@ -15,13 +15,9 @@ import android.widget.Toast;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 
-import okhttp3.OkHttpClient;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegisterPage extends AppCompatActivity {
 
@@ -72,16 +68,6 @@ public class RegisterPage extends AppCompatActivity {
     }
 
     private void sendCreateAccount(){
-        HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
-
-        OkHttpClient httpClient = new OkHttpClient.Builder().addInterceptor(interceptor).build();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(HttpService.API_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .client(httpClient)
-                .build();
-        HttpService.service = retrofit.create(HttpService.HttpBinService.class);
-
         Call<HttpService.HttpBinResponse> call_createAccount = HttpService.service.postWithFormJson_createAccount(
                 textFirstName.getText().toString(), textLastName.getText().toString(),
                 textCitizenID.getText().toString(), textCreateMobileNum.getText().toString(), HttpService.RegisterContact.getNonce(),

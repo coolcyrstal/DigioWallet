@@ -47,6 +47,7 @@ public class HttpService {
         @SerializedName("success") private Boolean success;
         @SerializedName("error_code") private String error_code;
         @SerializedName("ref_otp") private String ref_otp;
+        @SerializedName("token") private String token;
 
         public Boolean getSuccess() {
             return success;
@@ -66,6 +67,10 @@ public class HttpService {
 
         public String getRef_OTP() {
             return ref_otp;
+        }
+
+        public String getToken() {
+            return token;
         }
     }
 
@@ -165,6 +170,15 @@ public class HttpService {
         Call<HttpBinResponse> postWithFormJson_pin(
                 @Field("pin") String pin,
                 @Field("mobile") String mobile,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        @FormUrlEncoded
+        @POST("mobile_login")
+        Call<HttpBinResponse> postWithFormJson_login(
+                @Field("mobile") String mobile,
+                @Field("pin") String pin,
                 @Field("versions") String versions,
                 @Field("nonce") String nonce
         );
