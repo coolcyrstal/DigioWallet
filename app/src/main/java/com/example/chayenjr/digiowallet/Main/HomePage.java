@@ -2,7 +2,11 @@ package com.example.chayenjr.digiowallet.Main;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -28,6 +32,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     TextView account_name, account_citizen_id;
     View view;
 
+    ViewPager viewPager;
+    private TabLayout tabLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +43,47 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         initialize();
         setToolbar();
         setDrawer();
+        setViewPager();
+
+    }
+
+    private void setViewPager() {
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
+            @Override
+            public Fragment getItem(int position) {
+                switch (position){
+                    case 0 :
+                        return MainHomePageFragment.newInstance();
+                    case 1 :
+                        return HistoryListFragment.newInstance();
+                    default:
+                        return null;
+                }
+
+            }
+
+            @Override
+            public int getCount() {
+                return 2;
+            }
+
+            @Override
+            public CharSequence getPageTitle(int position) {
+                switch (position){
+                    case 0 :
+                        return "HOME";
+                    case 1 :
+                        return "HISTORY";
+                    default:
+                        return "";
+                }
+            }
+        });
+
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        tabLayout.setupWithViewPager(viewPager);
+
     }
 
     private void initialize() {

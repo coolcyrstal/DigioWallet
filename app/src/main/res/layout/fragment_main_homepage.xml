@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorGrey"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <com.example.chayenjr.digiowallet.Main.view.CustomButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:setIcon="@drawable/icon_menu"
+            app:setText="Fund In"/>
+
+        <com.example.chayenjr.digiowallet.Main.view.CustomButton
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:setText="Transfer"
+            app:setIcon="@drawable/icon_menu"/>
+
+        <com.example.chayenjr.digiowallet.Main.view.CustomButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:setIcon="@drawable/icon_menu_withdraw"
+            app:setText="Winthdraw"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="1dp"
+        android:layout_width="match_parent"
+        android:layout_height="120dp">
+
+        <com.example.chayenjr.digiowallet.Main.view.CustomButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:setIcon="@drawable/icon_menu_topup"
+            app:setText="Top Up"/>
+
+        <com.example.chayenjr.digiowallet.Main.view.CustomButton
+            android:layout_marginLeft="1dp"
+            android:layout_marginRight="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:setIcon="@drawable/icon_menu_billpay"
+            app:setText="Bill Pay"/>
+
+        <com.example.chayenjr.digiowallet.Main.view.CustomButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:clickable="true"
+            app:setIcon="@drawable/icon_menu"
+            app:setText="Scan to Pay"/>
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
