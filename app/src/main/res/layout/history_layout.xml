@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textInfoTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Transfer to 081***5678"
+            android:textColor="@android:color/black"
+            android:paddingTop="16dp"
+            android:paddingLeft="16dp"/>
+
+        <TextView
+            android:id="@+id/textDateTransfer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10/06/2016 15:35:21"
+            android:layout_marginTop="5dp"
+            android:paddingLeft="16dp"/>
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_weight="1"/>
+
+
+    <TextView
+        android:id="@+id/textCountTransfer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingRight="16dp"
+        android:paddingTop="16dp"
+        android:text="+200.00"
+        android:textColor="@android:color/holo_green_dark" />
+
+
+
+
+</LinearLayout>

@@ -8,7 +8,7 @@ import java.util.Random;
 /**
  * Created by Chayenjr on 5/7/2559.
  */
-public class RegisterContact {
+public class registerContact {
 
     String firstname;
     String lastname;
@@ -17,7 +17,7 @@ public class RegisterContact {
     String nonce;
     String versions;
 
-    public RegisterContact(String firstname, String lastname, String mobile, String card_id) {
+    public registerContact(String firstname, String lastname, String mobile, String card_id) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.mobile = mobile;
