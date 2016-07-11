@@ -37,13 +37,17 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
-    TextView account_name, account_citizen_id, username, usermoney;
+    static TextView account_name;
+    static TextView account_citizen_id;
+    static TextView username;
+    static TextView usermoney;
     AppCompatTextView mTextViewName, mTextViewMoney, mTitle;
     View view;
 
     ViewPager viewPager;
     private TabLayout tabLayout;
     public static AccountDetails accountDetails;
+    static String account_details;
     RelativeLayout mViewInformation;
 
 
@@ -111,19 +115,17 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         account_citizen_id = (TextView)view.findViewById(R.id.account_citizen_id);
         username = (TextView)findViewById(R.id.username);
         usermoney = (TextView)findViewById(R.id.user_money);
-        Log.d("show", LoginRegister.account_info.getF_NAME());
-        setAccountInfo();
+
     }
 
-    private void setAccountInfo(){
+    private static void setAccountInfo(){
         account_name.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
         account_citizen_id.setText(LoginRegister.account_info.getCard_id().substring(0, 4) + "*****"
                                     + LoginRegister.account_info.getCard_id()
                                         .substring(LoginRegister.account_info.getCard_id().length() - 4,
                                                 LoginRegister.account_info.getCard_id().length()));
         username.setText(LoginRegister.account_info.getF_NAME());
-        usermoney.setText(accountDetails.getAccounts()
-                .get(0).getAvaliable_balance());
+        usermoney.setText(account_details);
     }
 
     private void setToolbar() {
@@ -158,9 +160,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         };
         mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+
     }
 
-    private void call_account(){
+    public static void call_account(){
         Call<HttpService.HttpBinResponse> call_getAccount = HttpService.service.postWithFormJson_getAccount(
                 LoginRegister.check_token, LoginRegister.account_info.getCard_id(),
                 HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
@@ -169,12 +172,15 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
                 accountDetails = response.body().getAccountDetails();
+                account_details = accountDetails.getAccounts().get(0).getAvaliable_balance();
                 Log.d("balance", accountDetails.getAccounts().get(0).getAvaliable_balance());
+                setAccountInfo();
+                Log.d("balance check", account_details);
             }
 
             @Override
             public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
-
+                Log.d("Fail", "fail");
             }
         });
     }
