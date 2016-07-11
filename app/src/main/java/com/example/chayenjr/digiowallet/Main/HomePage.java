@@ -116,7 +116,9 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         username = (TextView)findViewById(R.id.username);
         usermoney = (TextView)findViewById(R.id.user_money);
 
+
     }
+
 
     private static void setAccountInfo(){
         account_name.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
@@ -173,9 +175,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
                 accountDetails = response.body().getAccountDetails();
                 account_details = accountDetails.getAccounts().get(0).getAvaliable_balance();
-                Log.d("balance", accountDetails.getAccounts().get(0).getAvaliable_balance());
+
                 setAccountInfo();
-                Log.d("balance check", account_details);
             }
 
             @Override
@@ -191,12 +192,33 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         return true;
     }
 
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
         return super.onOptionsItemSelected(item);
     }
+
+    private void logout(){
+        Call<HttpService.HttpBinResponse> call_logout = HttpService.service.postWithFormJson_logout(
+                LoginRegister.check_token,
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
+
+        call_logout.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                HomePage.this.finish();
+                Log.d("logout", "success");
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+                Log.d("Fail", "fail");
+            }
+        });
+    }
+
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -216,7 +238,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         }else if (id == R.id.about) {
 
         }else if (id == R.id.logout) {
-
+            logout();
         }
 
         mDrawerLayout.closeDrawer(GravityCompat.START);

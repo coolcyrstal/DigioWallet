@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.menu.MenuView;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -58,6 +59,7 @@ public class LoginRegister extends AppCompatActivity {
     EditText text_PIN;
     public static String check_token;
     public static LoginDetails account_info;
+    MenuView.ItemView logout;
 
 
     @Override
@@ -100,6 +102,8 @@ public class LoginRegister extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     private void checkLoginOnDB(){
