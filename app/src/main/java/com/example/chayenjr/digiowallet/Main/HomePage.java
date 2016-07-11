@@ -1,5 +1,6 @@
 package com.example.chayenjr.digiowallet.Main;
 
+import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
@@ -25,17 +28,18 @@ import com.example.chayenjr.digiowallet.Tranfer.TransferFragment;
 
 import org.json.JSONException;
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TransferFragment.OnFragmentInteractionListener {
+public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TransferFragment.OnFragmentInteractionListener, MainHomePageFragment.TransferListener {
     Toolbar mToolbar;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
-    AppCompatTextView mTextviewName, mTextViewMoney;
+    AppCompatTextView mTextViewName, mTextViewMoney, mTitle;
     TextView account_name, account_citizen_id;
     View view;
 
     ViewPager viewPager;
     private TabLayout tabLayout;
+    RelativeLayout mViewInformation;
 
 
     @Override
@@ -50,7 +54,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     }
 
     private void setViewPager() {
-        viewPager = (ViewPager) findViewById(R.id.viewPager);
         viewPager.setAdapter(new FragmentStatePagerAdapter(getSupportFragmentManager()) {
             @Override
             public Fragment getItem(int position) {
@@ -83,17 +86,19 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             }
         });
 
-        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
         tabLayout.setupWithViewPager(viewPager);
-
     }
 
     private void initialize() {
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         navigationView = (NavigationView) findViewById(R.id.nav_view);
-        mTextviewName = (AppCompatTextView) findViewById(R.id.username);
+        mTextViewName = (AppCompatTextView) findViewById(R.id.username);
         mTextViewMoney = (AppCompatTextView) findViewById(R.id.user_money);
+        mViewInformation = (RelativeLayout) findViewById(R.id.information_account);
+        viewPager = (ViewPager) findViewById(R.id.viewPager);
+        tabLayout = (TabLayout) findViewById(R.id.tabLayout);
+        mTitle = (AppCompatTextView) findViewById(R.id.title);
         view = navigationView.getHeaderView(0);
 
         account_name = (TextView)view.findViewById(R.id.account_name);
@@ -118,6 +123,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         getSupportActionBar().setTitle("");
         mToolbar.setTitle("");
     }
+
+    protected void goneView(){
+        mViewInformation.setVisibility(View.GONE);
+        viewPager.setVisibility(View.GONE);
+        tabLayout.setVisibility(View.GONE);
+        mTitle.setText("Transfer");
+    }
+
     private void setDrawer() {
         navigationView.setItemIconTintList(null);
         navigationView.setNavigationItemSelectedListener(this);
@@ -179,6 +192,19 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public void onFragmentInteraction(Uri uri) {
+
+    }
+
+    @Override
+    public void onTransferClickListener() {
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main, TransferFragment.newInstance("",""), "Transfer")
+                .addToBackStack(null)
+                .commit();
+        InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
+        goneView();
 
     }
 }

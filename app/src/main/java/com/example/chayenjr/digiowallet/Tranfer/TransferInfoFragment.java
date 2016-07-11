@@ -27,7 +27,6 @@ public class TransferInfoFragment extends Fragment {
     AppCompatTextView tvSelectBankName;
     private TransferFragment.OnFragmentInteractionListener mListener;
 
-
     Integer[] imageIDs = {
             R.drawable.kbank_selector,
             R.drawable.ktb_selector,
