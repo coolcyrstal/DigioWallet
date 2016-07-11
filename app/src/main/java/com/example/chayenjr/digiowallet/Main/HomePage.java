@@ -23,22 +23,27 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
+import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Service.HttpService;
 import com.example.chayenjr.digiowallet.Tranfer.TransferFragment;
 
-import org.json.JSONException;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TransferFragment.OnFragmentInteractionListener, MainHomePageFragment.TransferListener {
     Toolbar mToolbar;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    TextView account_name, account_citizen_id, username, usermoney;
     AppCompatTextView mTextViewName, mTextViewMoney, mTitle;
-    TextView account_name, account_citizen_id;
     View view;
 
     ViewPager viewPager;
     private TabLayout tabLayout;
+    public static AccountDetails accountDetails;
     RelativeLayout mViewInformation;
 
 
@@ -46,6 +51,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
+        call_account();
         initialize();
         setToolbar();
         setDrawer();
@@ -103,19 +109,21 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         account_name = (TextView)view.findViewById(R.id.account_name);
         account_citizen_id = (TextView)view.findViewById(R.id.account_citizen_id);
+        username = (TextView)findViewById(R.id.username);
+        usermoney = (TextView)findViewById(R.id.user_money);
         Log.d("show", LoginRegister.account_info.getF_NAME());
-        try {
-            setAccountInfo();
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        setAccountInfo();
     }
 
-    private void setAccountInfo() throws JSONException {
+    private void setAccountInfo(){
         account_name.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
         account_citizen_id.setText(LoginRegister.account_info.getCard_id().substring(0, 4) + "*****"
                                     + LoginRegister.account_info.getCard_id()
-                                        .substring(LoginRegister.account_info.getCard_id().length() - 4, LoginRegister.account_info.getCard_id().length()));
+                                        .substring(LoginRegister.account_info.getCard_id().length() - 4,
+                                                LoginRegister.account_info.getCard_id().length()));
+        username.setText(LoginRegister.account_info.getF_NAME());
+        usermoney.setText(accountDetails.getAccounts()
+                .get(0).getAvaliable_balance());
     }
 
     private void setToolbar() {
@@ -150,6 +158,25 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         };
         mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
+    }
+
+    private void call_account(){
+        Call<HttpService.HttpBinResponse> call_getAccount = HttpService.service.postWithFormJson_getAccount(
+                LoginRegister.check_token, LoginRegister.account_info.getCard_id(),
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
+
+        call_getAccount.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                accountDetails = response.body().getAccountDetails();
+                Log.d("balance", accountDetails.getAccounts().get(0).getAvaliable_balance());
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

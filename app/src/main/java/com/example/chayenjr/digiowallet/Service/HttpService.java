@@ -1,6 +1,7 @@
 package com.example.chayenjr.digiowallet.Service;
 
 import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
+import com.example.chayenjr.digiowallet.Main.manager.LoginDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -49,7 +50,8 @@ public class HttpService {
         @SerializedName("error_code") private String error_code;
         @SerializedName("ref_otp") private String ref_otp;
         @SerializedName("token") private String token;
-        @SerializedName("details") private AccountDetails details;
+        @SerializedName("details") private LoginDetails details;
+        @SerializedName("account_details") private AccountDetails accountDetails;
 
 
         public Boolean getSuccess() {
@@ -76,12 +78,20 @@ public class HttpService {
             return token;
         }
 
-        public AccountDetails getDetails() {
+        public LoginDetails getDetails() {
             return details;
         }
 
-        public void setDetails(AccountDetails details) {
+        public void setDetails(LoginDetails details) {
             this.details = details;
+        }
+
+        public AccountDetails getAccountDetails() {
+            return accountDetails;
+        }
+
+        public void setAccountDetails(AccountDetails accountDetails) {
+            this.accountDetails = accountDetails;
         }
     }
 
@@ -190,6 +200,15 @@ public class HttpService {
         Call<HttpBinResponse> postWithFormJson_login(
                 @Field("mobile") String mobile,
                 @Field("pin") String pin,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        @FormUrlEncoded
+        @POST("mobile_getAccount")
+        Call<HttpBinResponse> postWithFormJson_getAccount(
+                @Field("token") String token,
+                @Field("Acc_no") String Acc_no,
                 @Field("versions") String versions,
                 @Field("nonce") String nonce
         );

@@ -2,57 +2,64 @@ package com.example.chayenjr.digiowallet.Main.manager;
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.List;
+
 /**
- * Created by Chayenjr on 8/7/2559.
+ * Created by Chayenjr on 11/7/2559.
  */
 public class AccountDetails {
-    @SerializedName("F_NAME") private String F_NAME;
-    @SerializedName("L_NAME") private String L_NAME;
-    @SerializedName("Mobile") private String Mobile;
-    @SerializedName("Card_id") private String Card_id;
-    @SerializedName("Last_login") private String Last_login;
-
-    public AccountDetails(){
-
-    }
-
-    public String getF_NAME() {
-        return F_NAME;
-    }
-
-    public String getL_NAME() {
-        return L_NAME;
-    }
-
-    public String getMobile() {
-        return Mobile;
-    }
+    @SerializedName("card_id") private String card_id;
+    @SerializedName("card_type") private String card_type;
+    @SerializedName("name") private String name;
+    @SerializedName("mobile_no") private String mobile_no;
+    @SerializedName("email") private String email;
+    @SerializedName("accounts") private List<AccountListDetails> accounts;
 
     public String getCard_id() {
-        return Card_id;
+        return card_id;
     }
 
-    public String getLast_login() {
-        return Last_login;
+    public void setCard_id(String card_id) {
+        this.card_id = card_id;
     }
 
-    public void setF_NAME(String f_NAME) {
-        F_NAME = f_NAME;
+    public String getCard_type() {
+        return card_type;
     }
 
-    public void setL_NAME(String l_NAME) {
-        L_NAME = l_NAME;
+    public void setCard_type(String card_type) {
+        this.card_type = card_type;
     }
 
-    public void setMobile(String mobile) {
-        Mobile = mobile;
+    public String getName() {
+        return name;
     }
 
-    public void setCard_id(String Card_id) {
-        this.Card_id = Card_id;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setLast_login(String last_login) {
-        Last_login = last_login;
+    public String getMobile_no() {
+        return mobile_no;
+    }
+
+    public void setMobile_no(String mobile_no) {
+        this.mobile_no = mobile_no;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public List<AccountListDetails> getAccounts() {
+        return accounts;
+    }
+
+    public void setAccounts(List<AccountListDetails> accounts) {
+        this.accounts = accounts;
     }
 }

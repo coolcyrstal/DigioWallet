@@ -15,7 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.Main.HomePage;
-import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
+import com.example.chayenjr.digiowallet.Main.manager.LoginDetails;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 import com.example.chayenjr.digiowallet.register.RegisterPage;
 
@@ -56,8 +56,8 @@ public class LoginRegister extends AppCompatActivity {
     };
     EditText text_mobileNum;
     EditText text_PIN;
-    String check_token;
-    public static AccountDetails account_info;
+    public static String check_token;
+    public static LoginDetails account_info;
 
 
     @Override
