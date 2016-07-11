@@ -1,5 +1,6 @@
 package com.example.chayenjr.digiowallet.Main;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -20,10 +21,11 @@ import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Tranfer.TransferFragment;
 
 import org.json.JSONException;
 
-public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class HomePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, TransferFragment.OnFragmentInteractionListener {
     Toolbar mToolbar;
     NavigationView navigationView;
     DrawerLayout mDrawerLayout;
@@ -173,5 +175,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
         mDrawerLayout.closeDrawer(GravityCompat.START);
         return false;
+    }
+
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
     }
 }

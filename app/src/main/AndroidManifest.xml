@@ -25,6 +25,8 @@
             android:name=".Main.HomePage"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         </activity>
+
+
     </application>
 
 </manifest>

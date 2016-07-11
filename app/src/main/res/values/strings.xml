@@ -6,7 +6,7 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    
+
     <string name="home">HOME</string>
     <string name="history">HISTORY</string>
 
@@ -19,5 +19,20 @@
     <string name="logout">LOGOUT</string>
     <string name="openDrawer">open</string>
     <string name="closeDrawer">close</string>
+    <string name="you_want_to_transfer_to">You want to transfer to..</string>
+    <string name="bank_account">Bank Account</string>
+    <string name="digio_wallet">Digio Wallet</string>
+    <string name="citizen_id">Citizen ID</string>
+    <string name="select_bank">Select bank</string>
+
+    <string name="kbank">Kasikorn Bank</string>
+    <string name="ktb">Krung Thai Bank</string>
+    <string name="scb">Siam Commercial Bank</string>
+    <string name="krungsri">Krungsri Bank</string>
+    <string name="tbank">Thanachart Bank</string>
+    <string name="to_account_no">To Account No</string>
+    <string name="amount">Amount</string>
+    <string name="next">Next</string>
+    <string name="note">Note</string>
 
 </resources>

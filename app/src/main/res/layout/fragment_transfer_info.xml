@@ -1,0 +1,110 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorGrey"
+    tools:context="com.example.chayenjr.digiowallet.Tranfer.TransferInfoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:id="@+id/view_select_bank"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:paddingTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/select_bank"
+                android:gravity="center_horizontal"
+                android:textColor="@color/gray_text"
+                android:id="@+id/select"
+                />
+
+            <android.widget.Gallery
+                android:spacing="5dp"
+                android:layout_below="@+id/select"
+                android:id="@+id/gallery_bank"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:gravity="center_horizontal"
+                android:textColor="@android:color/black"
+                android:layout_below="@+id/gallery_bank"
+                android:id="@+id/bank_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="4dp"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_below="@+id/view_select_bank"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical">
+            <android.support.v7.widget.AppCompatEditText
+                android:layout_marginTop="4dp"
+                android:inputType="number"
+                android:singleLine="true"
+                android:hint="@string/to_account_no"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <android.support.v7.widget.AppCompatEditText
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_marginTop="4dp"
+                android:hint="@string/amount"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_above="@+id/btn_next"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:paddingBottom="40dp"
+            android:orientation="vertical"
+            android:layout_marginBottom="20dp">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:background="@android:color/white"
+                android:id="@+id/note"
+                android:hint="@string/note"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_next"
+            android:background="@color/button_color"
+            android:text="@string/next"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"
+            android:textSize="16dp"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="50dp" />
+
+    </RelativeLayout>
+
+</FrameLayout>

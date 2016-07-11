@@ -1,0 +1,61 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey">
+
+    <!-- TODO: Update blank fragment layout -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
+        <TextView
+            android:textColor="@android:color/black"
+            android:gravity="center_horizontal"
+            android:padding="8dp"
+            android:text="@string/you_want_to_transfer_to"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tvTran"/>
+        <LinearLayout
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:layout_below="@+id/tvTran"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="3"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/bank_account_btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/bank_account"
+                android:textAllCaps="false"
+                android:drawableTop="@drawable/ic_tranfer_bank"
+                android:background="@android:color/transparent"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/digio_wallet"
+                android:textAllCaps="false"
+                android:drawableTop="@drawable/ic_tranfer_id_digio_wallet"
+                android:background="@android:color/transparent"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/citizen_id"
+                android:textAllCaps="false"
+                android:drawableTop="@drawable/ic_tranfer_citicen_id"
+                android:background="@android:color/transparent"
+                />
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+</FrameLayout>
