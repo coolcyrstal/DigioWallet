@@ -6,8 +6,10 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
 
 
@@ -25,6 +27,8 @@ public class ConfirmTransferFragment extends Fragment {
     private TextView creditFee;
     private TextView creditTotal;
     private TextView descriptionText;
+    private TextView textBankName;
+    private ImageView iconBank;
 
     public ConfirmTransferFragment() {
         super();
@@ -60,6 +64,8 @@ public class ConfirmTransferFragment extends Fragment {
         creditAmount.setText(getArguments().getString("amount"));
         descriptionText.setText(getArguments().getString("note"));
 
+        setInstance();
+
         return rootView;
     }
 
@@ -77,6 +83,18 @@ public class ConfirmTransferFragment extends Fragment {
         creditFee = (TextView) rootView.findViewById(R.id.textFee);
         creditTotal = (TextView) rootView.findViewById(R.id.textTotal);
         descriptionText = (TextView) rootView.findViewById(R.id.textDescription);
+        textBankName = (TextView)rootView.findViewById(R.id.textBankName);
+        iconBank = (ImageView)rootView.findViewById(R.id.iconBank);
+    }
+
+    private void setInstance(){
+        customerNumber.setText(TransferInfoFragment.account_number);
+        creditAmount.setText(TransferInfoFragment.credit_amount);
+        descriptionText.setText(TransferInfoFragment.text_note_description);
+        customerName.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
+
+        textBankName.setText(TransferInfoFragment.bankName[TransferInfoFragment.gallery.getSelectedItemPosition()]);
+        iconBank.setImageResource(TransferInfoFragment.imageIDs[TransferInfoFragment.gallery.getSelectedItemPosition()]);
     }
 
     @Override

@@ -11,38 +11,36 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
-import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.R;
 
 public class TransferInfoFragment extends Fragment {
 
-    private TextView accountNumber;
-    private TextView creditAmount;
-    private TextView noteDescription;
+    private EditText accountNumber;
+    private EditText creditAmount;
+    private EditText noteDescription;
     private Button btnNext;
 
     public interface OnFragmentListener {
         void setOnClickButtonNext();
     }
 
-    // TODO: Rename parameter arguments, choose names that match
-
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-
     private String mParam1;
     private String mParam2;
-    Gallery gallery;
+    public static Gallery gallery;
     AppCompatTextView tvSelectBankName;
+    public static String account_number;
+    public static String credit_amount;
+    public static String text_note_description;
 
     private TransferFragment.OnFragmentInteractionListener mListener;
 
-    Integer[] imageIDs = {
+    public static Integer[] imageIDs = {
             R.drawable.kbank_selector,
             R.drawable.ktb_selector,
             R.drawable.scb_selector,
@@ -51,7 +49,7 @@ public class TransferInfoFragment extends Fragment {
             R.drawable.digio_selector
     };
 
-    Integer[] bankName = {
+    public static Integer[] bankName = {
             R.string.kbank,
             R.string.ktb,
             R.string.scb,
@@ -60,7 +58,7 @@ public class TransferInfoFragment extends Fragment {
             R.string.digio
     };
 
-    BankAdapter bankAdapter;
+    public static BankAdapter bankAdapter;
 
 
     public TransferInfoFragment() {
@@ -118,15 +116,18 @@ public class TransferInfoFragment extends Fragment {
     private void initInstances(View rootView) {
         gallery = (Gallery) rootView.findViewById(R.id.gallery_bank);
         tvSelectBankName = (AppCompatTextView) rootView.findViewById(R.id.bank_name);
-        accountNumber = (TextView)rootView.findViewById(R.id.editAccountNumber);
-        creditAmount = (TextView) rootView.findViewById(R.id.editAmount);
-        noteDescription = (TextView) rootView.findViewById(R.id.editNote);
+        accountNumber = (EditText)rootView.findViewById(R.id.editAccountNumber);
+        creditAmount = (EditText) rootView.findViewById(R.id.editAmount);
+        noteDescription = (EditText) rootView.findViewById(R.id.editNote);
         btnNext = (Button) rootView.findViewById(R.id.btn_next);
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 OnFragmentListener listener = (OnFragmentListener) getActivity();
                 listener.setOnClickButtonNext();
+                account_number = accountNumber.getText().toString();
+                credit_amount = creditAmount.getText().toString();
+                text_note_description = noteDescription.getText().toString();
             }
         });
     }
@@ -138,7 +139,6 @@ public class TransferInfoFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
