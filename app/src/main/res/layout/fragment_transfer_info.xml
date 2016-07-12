@@ -55,22 +55,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@android:color/white"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:padding="12dp">
             <android.support.v7.widget.AppCompatEditText
-                android:layout_marginTop="4dp"
+                android:id="@+id/editAccountNumber"
                 android:inputType="number"
                 android:singleLine="true"
-                android:id="@+id/to_account_number"
                 android:hint="@string/to_account_no"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
             <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editAmount"
                 android:inputType="number"
                 android:singleLine="true"
-                android:layout_marginTop="4dp"
-                android:id="@+id/amount"
+                android:layout_marginTop="6dp"
                 android:hint="@string/amount"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
@@ -89,11 +89,11 @@
             android:layout_marginBottom="20dp">
 
             <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/note"
+                android:id="@+id/editNote"
                 android:hint="@string/note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
+                android:padding="12dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="8dp"/>

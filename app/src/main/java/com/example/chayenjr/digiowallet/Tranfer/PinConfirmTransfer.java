@@ -19,6 +19,10 @@ import com.mhk.android.passcodeview.PasscodeView;
 
 public class PinConfirmTransfer extends Fragment {
 
+    public interface pinCodeListener {
+        void pinCodeSuccess();
+    }
+
     public PinConfirmTransfer() {
         // Required empty public constructor
     }
@@ -49,12 +53,13 @@ public class PinConfirmTransfer extends Fragment {
             @Override
             public void onPasscodeEntered(String passcode) {
                 Toast.makeText(getActivity().getApplicationContext(), "Passcode entered: " + passcode, Toast.LENGTH_SHORT).show();
-                if(CreatePINCode.check_passcode.equals(passcode)){
-                    goSuccess();
-                } else{
-                    checkPasscode((AppCompatActivity) getContext(), "PIN Code not match!", "Please input PIN code again.", "OK");
-                    passcodeView.clearText();
-                }
+                goSuccess();
+//                if(CreatePINCode.check_passcode.equals(passcode)){
+//                    goSuccess();
+//                } else{
+//                    checkPasscode((AppCompatActivity) getContext(), "PIN Code not match!", "Please input PIN code again.", "OK");
+//                    passcodeView.clearText();
+//                }
             }
         });
 
@@ -63,6 +68,8 @@ public class PinConfirmTransfer extends Fragment {
 
     private void goSuccess(){
         //go confirm transfer page
+        pinCodeListener listener = (pinCodeListener) getActivity();
+        listener.pinCodeSuccess();
     }
 
     private AlertDialog checkPasscode(final AppCompatActivity act, CharSequence title,

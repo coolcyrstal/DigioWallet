@@ -11,15 +11,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Gallery;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.R;
 
 public class TransferInfoFragment extends Fragment {
 
+    private TextView accountNumber;
+    private TextView creditAmount;
+    private TextView noteDescription;
+    private Button btnNext;
+
+    public interface OnFragmentListener {
+        void setOnClickButtonNext();
+    }
+
+    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-   private static final String ARG_PARAM1 = "param1";
+
+    private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
 
@@ -27,9 +42,6 @@ public class TransferInfoFragment extends Fragment {
     private String mParam2;
     Gallery gallery;
     AppCompatTextView tvSelectBankName;
-    EditText toAccountNumber;
-    EditText amount;
-    Button next_button;
 
     private TransferFragment.OnFragmentInteractionListener mListener;
 
@@ -95,20 +107,6 @@ public class TransferInfoFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-
-        next_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment fragment = getActivity().getSupportFragmentManager()
-                        .findFragmentById(R.id.contentContainer);
-
-                if(fragment instanceof PinConfirmTransfer == false)
-                    getActivity().getSupportFragmentManager().beginTransaction()
-                            .replace(R.id.contentContainer,PinConfirmTransfer.newInstance())
-                            .commit();
-            }
-        });
-
         return rootView;
     }
 
@@ -121,9 +119,17 @@ public class TransferInfoFragment extends Fragment {
     private void initInstances(View rootView) {
         gallery = (Gallery) rootView.findViewById(R.id.gallery_bank);
         tvSelectBankName = (AppCompatTextView) rootView.findViewById(R.id.bank_name);
-        toAccountNumber = (EditText)rootView.findViewById(R.id.to_account_number);
-        amount = (EditText)rootView.findViewById(R.id.amount);
-        next_button = (Button) rootView.findViewById(R.id.btn_next);
+        accountNumber = (TextView)rootView.findViewById(R.id.editAccountNumber);
+        creditAmount = (TextView) rootView.findViewById(R.id.editAmount);
+        noteDescription = (TextView) rootView.findViewById(R.id.editNote);
+        btnNext = (Button) rootView.findViewById(R.id.btn_next);
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnFragmentListener listener = (OnFragmentListener) getActivity();
+                listener.setOnClickButtonNext();
+            }
+        });
     }
 
     @Override
@@ -133,6 +139,7 @@ public class TransferInfoFragment extends Fragment {
 
     }
 
+    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -156,4 +163,30 @@ public class TransferInfoFragment extends Fragment {
         mListener = null;
     }
 
+    /**
+     * This interface must be implemented by activities that contain this
+     * fragment to allow an interaction in this fragment to be communicated
+     * to the activity and potentially other fragments contained in that
+     * activity.
+     * <p/>
+     * See the Android Training lesson <a href=
+     * "http://developer.android.com/training/basics/fragments/communicating.html"
+     * >Communicating with Other Fragments</a> for more information.
+     */
+   /* public interface OnFragmentInteractionListener {
+        // TODO: Update argument type and name
+        void onFragmentInteraction(Uri uri);
+    }*/
+
+    public String getNoteDescription() {
+        return noteDescription.getText().toString();
+    }
+
+    public String getCreditAmount() {
+        return creditAmount.getText().toString();
+    }
+
+    public String getAccountNumber() {
+        return accountNumber.getText().toString();
+    }
 }

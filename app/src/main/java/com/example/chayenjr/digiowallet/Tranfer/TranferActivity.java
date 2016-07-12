@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.Main.MainHomePageFragment;
@@ -20,7 +21,9 @@ import com.example.chayenjr.digiowallet.R;
 
 public class TranferActivity extends AppCompatActivity implements TransferFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener,
-        TransferFragment.BtnListener{
+        TransferFragment.BtnListener,
+        TransferInfoFragment.OnFragmentListener,
+        PinConfirmTransfer.pinCodeListener {
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -30,15 +33,19 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
     private TextView account_citizen_id;
     private ActionBarDrawerToggle actionBarDrawerToggle;
 
+    private String accountNumber = null;
+    private String amount = null;
+    private String note = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tranfer);
 
-        if(savedInstanceState == null)
+        if (savedInstanceState == null)
             getSupportFragmentManager().beginTransaction()
-            .add(R.id.contentContainer,TransferFragment.newInstance("",""),"TransferFragment")
-            .commit();
+                    .add(R.id.contentContainer, TransferFragment.newInstance("", ""), "TransferFragment")
+                    .commit();
         initInstance();
     }
 
@@ -48,7 +55,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
     }
 
     /**************
-     Init Toolbar
+     * Init Toolbar
      **************/
 
     private void initToolbar() {
@@ -129,7 +136,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
     }
 
     /***************
-        Function
+     * Function
      ***************/
 
     @Override
@@ -142,9 +149,10 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
         Fragment fragment = getSupportFragmentManager()
                 .findFragmentById(R.id.contentContainer);
 
-        if(fragment instanceof TransferFragment)
+        if (fragment instanceof TransferInfoFragment == false)
             getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainer,TransferInfoFragment.newInstance("",""))
+                    .replace(R.id.contentContainer, TransferInfoFragment.newInstance("", ""), "TransferInfoFragment")
+                    .addToBackStack(null)
                     .commit();
     }
 
@@ -156,5 +164,46 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
     @Override
     public void mCitizenIdBtnListener() {
 
+    }
+
+    @Override
+    public void setOnClickButtonNext() {
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainer);
+
+        if (fragment instanceof TransferInfoFragment) {
+            TransferInfoFragment transferInfoFragment = (TransferInfoFragment) fragment;
+            accountNumber = transferInfoFragment.getAccountNumber();
+            amount = transferInfoFragment.getCreditAmount();
+
+            if (transferInfoFragment.getNoteDescription() != null)
+                note = transferInfoFragment.getNoteDescription();
+            else note = "";
+
+        }
+
+        if (accountNumber != "" && amount != "") {
+
+            if (fragment instanceof PinConfirmTransfer == false)
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentContainer, PinConfirmTransfer.newInstance())
+                        .addToBackStack(null)
+                        .commit();
+
+        } else {
+            Toast.makeText(TranferActivity.this, "Please Input Text", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void pinCodeSuccess() {
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainer);
+
+        if (fragment instanceof ConfirmTransferFragment == false) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainer, ConfirmTransferFragment.newInstance(accountNumber, amount, note))
+                    .commit();
+        }
     }
 }
