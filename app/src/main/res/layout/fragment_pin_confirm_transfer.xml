@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:passcodeView="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.chayenjr.digiowallet.Tranfer.PinConfirmTransfer">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Enter your PIN code to confrim transaction."
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:id="@+id/text_pinspeech"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"/>
+
+        <com.mhk.android.passcodeview.PasscodeView
+            android:id="@+id/passcode_view_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            passcodeView:numDigits="6"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:layout_centerHorizontal="true"
+            passcodeView:digitColorFilled="#fb4f9f"
+            android:layout_below="@+id/text_pinspeech"/>
+    </RelativeLayout>
+
+</FrameLayout>

@@ -4,30 +4,32 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Gallery;
-import android.widget.ImageView;
 
 import com.example.chayenjr.digiowallet.R;
 
 public class TransferInfoFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
+
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
    private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+
     private String mParam1;
     private String mParam2;
     Gallery gallery;
     AppCompatTextView tvSelectBankName;
+    EditText toAccountNumber;
+    EditText amount;
+    Button next_button;
 
     private TransferFragment.OnFragmentInteractionListener mListener;
 
@@ -54,15 +56,7 @@ public class TransferInfoFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     //* @param param1 Parameter 1.
-     //* @param param2 Parameter 2.
-     * @return A new instance of fragment TransferInfoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static TransferInfoFragment newInstance(String param1, String param2) {
         TransferInfoFragment fragment = new TransferInfoFragment();
         Bundle args = new Bundle();
@@ -102,6 +96,19 @@ public class TransferInfoFragment extends Fragment {
             }
         });
 
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = getActivity().getSupportFragmentManager()
+                        .findFragmentById(R.id.contentContainer);
+
+                if(fragment instanceof PinConfirmTransfer == false)
+                    getActivity().getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.contentContainer,PinConfirmTransfer.newInstance())
+                            .commit();
+            }
+        });
+
         return rootView;
     }
 
@@ -114,6 +121,9 @@ public class TransferInfoFragment extends Fragment {
     private void initInstances(View rootView) {
         gallery = (Gallery) rootView.findViewById(R.id.gallery_bank);
         tvSelectBankName = (AppCompatTextView) rootView.findViewById(R.id.bank_name);
+        toAccountNumber = (EditText)rootView.findViewById(R.id.to_account_number);
+        amount = (EditText)rootView.findViewById(R.id.amount);
+        next_button = (Button) rootView.findViewById(R.id.btn_next);
     }
 
     @Override
@@ -123,7 +133,6 @@ public class TransferInfoFragment extends Fragment {
 
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -147,18 +156,4 @@ public class TransferInfoFragment extends Fragment {
         mListener = null;
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-   /* public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
-    }*/
 }
