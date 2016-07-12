@@ -12,9 +12,14 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Toast;
 
+import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
-import com.example.chayenjr.digiowallet.register.CreatePINCode;
+import com.example.chayenjr.digiowallet.Service.HttpService;
 import com.mhk.android.passcodeview.PasscodeView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class PinConfirmTransfer extends Fragment {
@@ -44,7 +49,7 @@ public class PinConfirmTransfer extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootview = inflater.inflate(R.layout.fragment_pin_confirm_transfer, container, false);
-        final PasscodeView passcodeView = (PasscodeView)rootview.findViewById(R.id.passcode_view_confirm);
+        final PasscodeView passcodeView = (PasscodeView)rootview.findViewById(R.id.passcode_view_confirm_tracsaction);
         InputMethodManager inputMethodManager = (InputMethodManager) getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
@@ -53,13 +58,8 @@ public class PinConfirmTransfer extends Fragment {
             @Override
             public void onPasscodeEntered(String passcode) {
                 Toast.makeText(getActivity().getApplicationContext(), "Passcode entered: " + passcode, Toast.LENGTH_SHORT).show();
-                goSuccess();
-//                if(CreatePINCode.check_passcode.equals(passcode)){
-//                    goSuccess();
-//                } else{
-//                    checkPasscode((AppCompatActivity) getContext(), "PIN Code not match!", "Please input PIN code again.", "OK");
-//                    passcodeView.clearText();
-//                }
+                sendverifyPIN(passcode);
+                passcodeView.clearText();
             }
         });
 
@@ -70,6 +70,9 @@ public class PinConfirmTransfer extends Fragment {
         //go confirm transfer page
         pinCodeListener listener = (pinCodeListener) getActivity();
         listener.pinCodeSuccess();
+        InputMethodManager inputMethodManager = (InputMethodManager) getContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
     }
 
     private AlertDialog checkPasscode(final AppCompatActivity act, CharSequence title,
@@ -81,5 +84,28 @@ public class PinConfirmTransfer extends Fragment {
             }
         });
         return downloadDialog.show();
+    }
+
+    private void sendverifyPIN(String passcode){
+        Call<HttpService.HttpBinResponse> call_sendVerifyPIN = HttpService.service.postWithFormJson_verifyPIN(
+                passcode, LoginRegister.text_mobileNum.getText().toString(),
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce(),
+                LoginRegister.check_token);
+
+        call_sendVerifyPIN.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){
+                    goSuccess();
+                } else{
+                    checkPasscode((AppCompatActivity) getContext(), "PIN Code not match!", "Please input PIN code again.", "OK");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
     }
 }

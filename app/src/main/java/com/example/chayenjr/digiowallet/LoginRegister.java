@@ -55,7 +55,7 @@ public class LoginRegister extends AppCompatActivity {
             hide();
         }
     };
-    EditText text_mobileNum;
+    public static EditText text_mobileNum;
     EditText text_PIN;
     public static String check_token;
     public static LoginDetails account_info;

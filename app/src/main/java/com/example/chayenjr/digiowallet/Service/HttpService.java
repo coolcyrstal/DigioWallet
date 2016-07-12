@@ -158,6 +158,7 @@ public class HttpService {
         );
 
         // POST form encoded with form field params
+        //mobile service doc 1
         @FormUrlEncoded
         @POST("mobile_register")
         Call<HttpBinResponse> postWithFormJson_createAccount(
@@ -169,23 +170,7 @@ public class HttpService {
                 @Field("versions") String versions
         );
 
-        @FormUrlEncoded
-        @POST("mobile_reqOTP")
-        Call<HttpBinResponse> postWithFormJson_reqOTP(
-                @Field("mobile") String mobile,
-                @Field("versions") String versions,
-                @Field("nonce") String nonce
-        );
-
-        @FormUrlEncoded
-        @POST("mobile_verifyOTP")
-        Call<HttpBinResponse> postWithFormJson_verifyOTP(
-                @Field("ref_otp") String ref_otp,
-                @Field("otp") String otp,
-                @Field("versions") String versions,
-                @Field("nonce") String nonce
-        );
-
+        //mobile service doc 2
         @FormUrlEncoded
         @POST("mobile_pin")
         Call<HttpBinResponse> postWithFormJson_pin(
@@ -195,6 +180,7 @@ public class HttpService {
                 @Field("nonce") String nonce
         );
 
+        //mobile service doc 3
         @FormUrlEncoded
         @POST("mobile_login")
         Call<HttpBinResponse> postWithFormJson_login(
@@ -204,6 +190,35 @@ public class HttpService {
                 @Field("nonce") String nonce
         );
 
+        //mobile service doc 4
+        @FormUrlEncoded
+        @POST("mobile_logout")
+        Call<HttpBinResponse> postWithFormJson_logout(
+                @Field("token") String token,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        //mobile service doc 5
+        @FormUrlEncoded
+        @POST("mobile_reqOTP")
+        Call<HttpBinResponse> postWithFormJson_reqOTP(
+                @Field("mobile") String mobile,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        //mobile service doc 6
+        @FormUrlEncoded
+        @POST("mobile_verifyOTP")
+        Call<HttpBinResponse> postWithFormJson_verifyOTP(
+                @Field("ref_otp") String ref_otp,
+                @Field("otp") String otp,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        //mobile service doc 7
         @FormUrlEncoded
         @POST("mobile_getAccount")
         Call<HttpBinResponse> postWithFormJson_getAccount(
@@ -213,12 +228,15 @@ public class HttpService {
                 @Field("nonce") String nonce
         );
 
+        //mobile service doc 13
         @FormUrlEncoded
-        @POST("mobile_logout")
-        Call<HttpBinResponse> postWithFormJson_logout(
-                @Field("token") String token,
+        @POST("mobile_verifyPin")
+        Call<HttpBinResponse> postWithFormJson_verifyPIN(
+                @Field("pin") String pin,
+                @Field("mobile") String mobile,
                 @Field("versions") String versions,
-                @Field("nonce") String nonce
+                @Field("nonce") String nonce,
+                @Field("token") String token
         );
 
         // POST with a JSON body

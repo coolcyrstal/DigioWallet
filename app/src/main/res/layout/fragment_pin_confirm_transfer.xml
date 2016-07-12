@@ -24,7 +24,7 @@
             android:textAlignment="center"/>
 
         <com.mhk.android.passcodeview.PasscodeView
-            android:id="@+id/passcode_view_confirm"
+            android:id="@+id/passcode_view_confirm_tracsaction"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             passcodeView:numDigits="6"

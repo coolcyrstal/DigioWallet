@@ -1,6 +1,5 @@
 package com.example.chayenjr.digiowallet.Main;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,7 +18,6 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -175,9 +173,12 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         call_getAccount.enqueue(new Callback<HttpService.HttpBinResponse>() {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
-                accountDetails = response.body().getAccountDetails();
-                account_details = accountDetails.getAccounts().get(0).getAvaliable_balance();
-
+                if(response.body().getSuccess()){
+                    accountDetails = response.body().getAccountDetails();
+                    account_details = accountDetails.getAccounts().get(0).getAvaliable_balance();
+                } else{
+                    account_details = "0.00";
+                }
                 setAccountInfo();
             }
 

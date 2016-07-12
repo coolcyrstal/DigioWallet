@@ -11,10 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Gallery;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.R;
@@ -50,7 +47,8 @@ public class TransferInfoFragment extends Fragment {
             R.drawable.ktb_selector,
             R.drawable.scb_selector,
             R.drawable.krungsri_selector,
-            R.drawable.tbank_selector
+            R.drawable.tbank_selector,
+            R.drawable.digio_selector
     };
 
     Integer[] bankName = {
@@ -58,7 +56,8 @@ public class TransferInfoFragment extends Fragment {
             R.string.ktb,
             R.string.scb,
             R.string.krungsri,
-            R.string.tbank
+            R.string.tbank,
+            R.string.digio
     };
 
     BankAdapter bankAdapter;
