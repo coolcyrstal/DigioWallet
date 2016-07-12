@@ -31,7 +31,18 @@ public class TransferFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-    Button mBankAccountBtn;
+    private Button mBankAccountBtn;
+    private Button mDigioWalletBtn;
+    private Button mCitizenIdBtn;
+
+    interface BtnListener {
+        void mBankAccountBtnListener();
+
+        void mDigioWalletBtnListener();
+
+        void mCitizenIdBtnListener();
+    }
+
 
     public TransferFragment() {
         // Required empty public constructor
@@ -70,32 +81,14 @@ public class TransferFragment extends Fragment {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_tranfer, container, false);
         initInstances(rootView);
-        setBankAccountListener();
+        setBtnListener();
         return rootView;
-    }
-
-    private void setBankAccountListener() {
-        mBankAccountBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mBankAccountBtn.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                            getActivity().getSupportFragmentManager().beginTransaction()
-                                    .replace(R.id.main, TransferInfoFragment.newInstance("",""), "Bank Account")
-                                    .addToBackStack(null)
-                                    .commit();
-                            InputMethodManager inputMethodManager = (InputMethodManager) getContext()
-                                    .getSystemService(Context.INPUT_METHOD_SERVICE);
-                            inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
-                    }
-                });
-            }
-        });
     }
 
     private void initInstances(View rootView) {
         mBankAccountBtn = (Button) rootView.findViewById(R.id.bank_account_btn);
+        mDigioWalletBtn = (Button) rootView.findViewById(R.id.digio_wallet_btn);
+        mCitizenIdBtn = (Button) rootView.findViewById(R.id.citizen_id_btn);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -127,7 +120,7 @@ public class TransferFragment extends Fragment {
      * fragment to allow an interaction in this fragment to be communicated
      * to the activity and potentially other fragments contained in that
      * activity.
-     * <p>
+     * <p/>
      * See the Android Training lesson <a href=
      * "http://developer.android.com/training/basics/fragments/communicating.html"
      * >Communicating with Other Fragments</a> for more information.
@@ -136,4 +129,33 @@ public class TransferFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    /******************
+     * Listener
+     ******************/
+    private void setBtnListener() {
+        final BtnListener listener = (BtnListener) getActivity();
+
+        mBankAccountBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.mBankAccountBtnListener();
+            }
+        });
+
+        mDigioWalletBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.mDigioWalletBtnListener();
+            }
+        });
+
+        mCitizenIdBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                listener.mCitizenIdBtnListener();
+            }
+        });
+    }
+
 }

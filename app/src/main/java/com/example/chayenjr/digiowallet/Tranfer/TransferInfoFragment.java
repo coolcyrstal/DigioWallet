@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Gallery;
+import android.widget.ImageView;
 
 import com.example.chayenjr.digiowallet.R;
 
@@ -25,6 +28,7 @@ public class TransferInfoFragment extends Fragment {
     private String mParam2;
     Gallery gallery;
     AppCompatTextView tvSelectBankName;
+
     private TransferFragment.OnFragmentInteractionListener mListener;
 
     Integer[] imageIDs = {
@@ -43,7 +47,7 @@ public class TransferInfoFragment extends Fragment {
             R.string.tbank
     };
 
-    BankAdapter bankAdapter = new BankAdapter(getContext(),imageIDs,gallery);
+    BankAdapter bankAdapter;
 
 
     public TransferInfoFragment() {
@@ -86,30 +90,23 @@ public class TransferInfoFragment extends Fragment {
         initInstances(rootView);
         setGalleryAdapter();
 
-
-
-
-
         gallery.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Log.d("select",gallery.getSelectedItemPosition() +"");
                 tvSelectBankName.setText(bankName[gallery.getSelectedItemPosition()]);
-
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
             }
         });
 
-
-
-        return inflater.inflate(R.layout.fragment_transfer_info, container, false);
+        return rootView;
     }
 
     private void setGalleryAdapter() {
+        bankAdapter = new BankAdapter(getContext(),imageIDs,gallery);
         gallery.setAdapter(bankAdapter);
         gallery.setSelection(2);
     }

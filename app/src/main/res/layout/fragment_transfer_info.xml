@@ -27,12 +27,13 @@
                 android:id="@+id/select"
                 />
 
-            <android.widget.Gallery
+            <Gallery
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:spacing="5dp"
                 android:layout_below="@+id/select"
-                android:id="@+id/gallery_bank"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:id="@+id/gallery_bank" >
+            </Gallery>
 
             <android.support.v7.widget.AppCompatTextView
                 android:layout_marginTop="4dp"
@@ -85,12 +86,14 @@
             android:layout_marginBottom="20dp">
 
             <android.support.v7.widget.AppCompatEditText
-                android:background="@android:color/white"
                 android:id="@+id/note"
                 android:hint="@string/note"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp" />
+                android:padding="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 

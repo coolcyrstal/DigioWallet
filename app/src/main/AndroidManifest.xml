@@ -17,16 +17,15 @@
             android:theme="@style/FullscreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".register.RegisterPage" />
-        <activity
-            android:name=".Main.HomePage"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        </activity>
-
-
+        <activity android:name=".Main.HomePage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".Tranfer.TranferActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
     </application>
 
 </manifest>

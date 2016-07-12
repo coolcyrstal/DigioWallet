@@ -1,6 +1,7 @@
 package com.example.chayenjr.digiowallet.Main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -26,6 +27,7 @@ import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
+import com.example.chayenjr.digiowallet.Tranfer.TranferActivity;
 import com.example.chayenjr.digiowallet.Tranfer.TransferFragment;
 
 import retrofit2.Call;
@@ -252,14 +254,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
 
     @Override
     public void onTransferClickListener() {
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main, TransferFragment.newInstance("",""), "Transfer")
-                .addToBackStack(null)
-                .commit();
-        InputMethodManager inputMethodManager = (InputMethodManager) getApplicationContext()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);
-        goneView();
-
+        Intent intent = new Intent(HomePage.this, TranferActivity.class);
+        startActivity(intent);
     }
 }

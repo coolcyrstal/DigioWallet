@@ -1,6 +1,7 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -45,9 +46,13 @@ public class BankAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
 
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        int densityDpi = (int)(metrics.density * 70f);
+
         final ImageView imageView = new ImageView(context);
         imageView.setImageResource(imageIDs[position]);
-        imageView.setLayoutParams(new Gallery.LayoutParams(130, 130));
+
+        imageView.setLayoutParams(new Gallery.LayoutParams(densityDpi, densityDpi));
 
         return imageView;
 

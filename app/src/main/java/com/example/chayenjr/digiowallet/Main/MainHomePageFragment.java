@@ -59,9 +59,6 @@ public class MainHomePageFragment extends Fragment {
             public void onClick(View view) {
                 TransferListener listener = (TransferListener) getActivity();
                 listener.onTransferClickListener();
-
-
-
             }
         });
     }
