@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.R;
@@ -16,6 +17,12 @@ import com.example.chayenjr.digiowallet.R;
  */
 @SuppressWarnings("unused")
 public class ConfirmTransferFragment extends Fragment {
+
+    private Button btnConfirm;
+
+    public interface OnFragmentListener{
+        void setOnClickConfirmButton();
+    }
 
 
     private TextView customerNumber;
@@ -60,6 +67,14 @@ public class ConfirmTransferFragment extends Fragment {
         creditAmount.setText(getArguments().getString("amount"));
         descriptionText.setText(getArguments().getString("note"));
 
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                OnFragmentListener listener = (OnFragmentListener) getActivity();
+                listener.setOnClickConfirmButton();
+            }
+        });
+
         return rootView;
     }
 
@@ -77,6 +92,7 @@ public class ConfirmTransferFragment extends Fragment {
         creditFee = (TextView) rootView.findViewById(R.id.textFee);
         creditTotal = (TextView) rootView.findViewById(R.id.textTotal);
         descriptionText = (TextView) rootView.findViewById(R.id.textDescription);
+        btnConfirm = (Button) rootView.findViewById(R.id.btnConfirm);
     }
 
     @Override

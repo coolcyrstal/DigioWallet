@@ -23,7 +23,9 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
         NavigationView.OnNavigationItemSelectedListener,
         TransferFragment.BtnListener,
         TransferInfoFragment.OnFragmentListener,
-        PinConfirmTransfer.pinCodeListener {
+        PinConfirmTransfer.pinCodeListener,
+        ConfirmTransferFragment.OnFragmentListener,
+        TransferSuccessFragment.OnFragmentListener {
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -186,7 +188,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
 
             if (fragment instanceof PinConfirmTransfer == false)
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentContainer, PinConfirmTransfer.newInstance())
+                        .replace(R.id.contentContainer, ConfirmTransferFragment.newInstance(accountNumber, amount, note))
                         .addToBackStack(null)
                         .commit();
 
@@ -205,5 +207,22 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
                     .replace(R.id.contentContainer, ConfirmTransferFragment.newInstance(accountNumber, amount, note))
                     .commit();
         }
+    }
+
+    @Override
+    public void setOnClickConfirmButton() {
+        Fragment fragment = getSupportFragmentManager()
+                .findFragmentById(R.id.contentContainer);
+
+        if (fragment instanceof TransferSuccessFragment == false) {
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.contentContainer, TransferSuccessFragment.newInstance())
+                    .commit();
+        }
+    }
+
+    @Override
+    public void setOnClickDoneButtonListener() {
+        finish();
     }
 }
