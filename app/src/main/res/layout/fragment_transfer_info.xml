@@ -65,7 +65,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="15dp"/>
             <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/editAmount"
                 android:inputType="number"
@@ -75,7 +76,8 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginRight="8dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textSize="15dp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -85,7 +87,10 @@
             android:layout_below="@+id/view_sendamount_toaccount"
             android:layout_above="@+id/note_description"
             android:background="@android:color/white"
-            android:padding="12dp">
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
 
             <ListView
                 android:id="@+id/list_account_number"

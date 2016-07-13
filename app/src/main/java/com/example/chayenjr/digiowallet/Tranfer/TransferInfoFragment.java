@@ -13,7 +13,9 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Gallery;
+import android.widget.ListView;
 
+import com.example.chayenjr.digiowallet.Main.HomePage;
 import com.example.chayenjr.digiowallet.R;
 
 public class TransferInfoFragment extends Fragment {
@@ -37,6 +39,8 @@ public class TransferInfoFragment extends Fragment {
     public static String account_number;
     public static String credit_amount;
     public static String text_note_description;
+    ListView radiolist_account;
+    UserAccountAdapter adapter;
 
     private TransferFragment.OnFragmentInteractionListener mListener;
 
@@ -104,6 +108,8 @@ public class TransferInfoFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+
+        adapter.notifyDataSetChanged();
         return rootView;
     }
 
@@ -130,6 +136,21 @@ public class TransferInfoFragment extends Fragment {
                 text_note_description = noteDescription.getText().toString();
             }
         });
+        radiolist_account = (ListView)rootView.findViewById(R.id.list_account_number);
+        adapter = new UserAccountAdapter();
+        getUserAccountNumber();
+    }
+
+    private void getUserAccountNumber(){
+        int i = 0;
+        String[] temp = new String[HomePage.accountDetails.getAccounts().size()];
+        while(i < HomePage.accountDetails.getAccounts().size()){
+            temp[i] = HomePage.accountDetails.getAccounts().get(i).getNumber();
+            i++;
+        }
+        Log.d("size", ""+HomePage.accountDetails.getAccounts().size());
+        adapter.setAccount_number(temp);
+        radiolist_account.setAdapter(adapter);
     }
 
     @Override

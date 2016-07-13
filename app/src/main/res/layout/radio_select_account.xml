@@ -22,7 +22,7 @@
                 android:text="4321****4321"
                 android:id="@+id/radioButton"
                 android:checked="false"
-                android:textSize="25dp"
+                android:textSize="15dp"
                 android:padding="10dp"/>
         </RadioGroup>
 
@@ -32,9 +32,10 @@
             android:layout_weight="1"/>
 
         <ImageView
-            android:id="@+id/iconBank"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_scb" />
+            android:id="@+id/iconBank_account"
+            android:layout_gravity="center"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_digio" />
     </LinearLayout>
 </LinearLayout>
