@@ -30,6 +30,15 @@ public class ConfirmTransferFragment extends Fragment {
     private TextView textBankName;
     private ImageView iconBank;
 
+    Integer[] ic_bank_ID = {
+            R.drawable.ic_kbank,
+            R.drawable.ic_ktb,
+            R.drawable.ic_scb,
+            R.drawable.ic_krungsri,
+            R.drawable.ic_tbank,
+            R.drawable.ic_digio
+    };
+
     public ConfirmTransferFragment() {
         super();
     }
@@ -94,7 +103,7 @@ public class ConfirmTransferFragment extends Fragment {
         customerName.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
 
         textBankName.setText(TransferInfoFragment.bankName[TransferInfoFragment.gallery.getSelectedItemPosition()]);
-        iconBank.setImageResource(TransferInfoFragment.imageIDs[TransferInfoFragment.gallery.getSelectedItemPosition()]);
+        iconBank.setImageResource(ic_bank_ID[TransferInfoFragment.gallery.getSelectedItemPosition()]);
     }
 
     @Override
