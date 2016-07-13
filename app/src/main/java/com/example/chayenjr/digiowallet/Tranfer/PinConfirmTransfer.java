@@ -68,8 +68,10 @@ public class PinConfirmTransfer extends Fragment {
 
     private void goSuccess(){
         //go confirm transfer page
+
         pinCodeListener listener = (pinCodeListener) getActivity();
         listener.pinCodeSuccess();
+
         InputMethodManager inputMethodManager = (InputMethodManager) getContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.toggleSoftInput(0, InputMethodManager.HIDE_IMPLICIT_ONLY);

@@ -230,9 +230,8 @@
         android:layout_height="wrap_content"
         android:text="CONFIRM"
         android:textColor="@android:color/white"
-        android:padding="12dp"
-        android:textAlignment="center"
-        android:background="#FF5252"
+        android:background="@drawable/button_selector_test"
+        android:textSize="16dp"
         />
 
 </LinearLayout>

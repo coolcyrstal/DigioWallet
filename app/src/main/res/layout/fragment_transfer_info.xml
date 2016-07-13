@@ -120,14 +120,13 @@
 
         <Button
             android:id="@+id/btn_next"
-            android:background="@color/button_color"
+            android:background="@drawable/button_selector_test"
             android:text="@string/next"
             android:textColor="@android:color/white"
-            android:textStyle="bold"
             android:textSize="16dp"
             android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
-            android:layout_height="50dp" />
+            android:layout_height="wrap_content" />
 
     </RelativeLayout>
 
