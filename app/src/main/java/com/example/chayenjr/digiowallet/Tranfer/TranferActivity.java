@@ -1,5 +1,7 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -17,6 +19,11 @@ import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Service.HttpService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TranferActivity extends AppCompatActivity implements TransferFragment.OnFragmentInteractionListener,
         NavigationView.OnNavigationItemSelectedListener,
@@ -147,14 +154,19 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
 
     @Override
     public void mBankAccountBtnListener() {
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.contentContainer);
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.contentContainer);
 
-        if (fragment instanceof TransferInfoFragment == false)
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainer, TransferInfoFragment.newInstance("", ""), "TransferInfoFragment")
-                    .addToBackStack(null)
-                    .commit();
+            if (fragment instanceof TransferInfoFragment == false)
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentContainer, TransferInfoFragment.newInstance("", ""), "TransferInfoFragment")
+                        .addToBackStack(null)
+                        .commit();
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+        }
     }
 
     @Override
@@ -172,25 +184,33 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
         Fragment fragment = getSupportFragmentManager()
                 .findFragmentById(R.id.contentContainer);
 
-        if (fragment instanceof TransferInfoFragment) {
-            TransferInfoFragment transferInfoFragment = (TransferInfoFragment) fragment;
-            accountNumber = transferInfoFragment.getAccountNumber();
-            amount = transferInfoFragment.getCreditAmount();
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            if (fragment instanceof TransferInfoFragment) {
+                TransferInfoFragment transferInfoFragment = (TransferInfoFragment) fragment;
+                accountNumber = transferInfoFragment.getAccountNumber();
+                amount = transferInfoFragment.getCreditAmount();
 
-            if (transferInfoFragment.getNoteDescription() != null)
-                note = transferInfoFragment.getNoteDescription();
-            else note = "";
+                if (transferInfoFragment.getNoteDescription() != null)
+                    note = transferInfoFragment.getNoteDescription();
+                else note = "";
 
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }
 
         if (accountNumber != "" && amount != "") {
-
-            if (fragment instanceof PinConfirmTransfer == false)
-                getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentContainer, PinConfirmTransfer.newInstance())
-                        .addToBackStack(null)
-                        .commit();
-
+            call_checkToken();
+            if(LoginRegister.check_status_login){
+                if (fragment instanceof PinConfirmTransfer == false)
+                    getSupportFragmentManager().beginTransaction()
+                            .replace(R.id.contentContainer, PinConfirmTransfer.newInstance())
+                            .addToBackStack(null)
+                            .commit();
+            }else{
+                checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+            }
         } else {
             Toast.makeText(TranferActivity.this, "Please Input Text", Toast.LENGTH_SHORT).show();
         }
@@ -198,30 +218,71 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
 
     @Override
     public void pinCodeSuccess() {
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.contentContainer);
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.contentContainer);
 
-        if (fragment instanceof ConfirmTransferFragment == false) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainer, ConfirmTransferFragment.newInstance(accountNumber, amount, note))
-                    .commit();
+            if (fragment instanceof ConfirmTransferFragment == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentContainer, ConfirmTransferFragment.newInstance(accountNumber, amount, note))
+                        .commit();
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }
     }
 
     @Override
     public void setOnClickConfirmButton() {
-        Fragment fragment = getSupportFragmentManager()
-                .findFragmentById(R.id.contentContainer);
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.contentContainer);
 
-        if (fragment instanceof TransferSuccessFragment == false) {
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.contentContainer, TransferSuccessFragment.newInstance())
-                    .commit();
+            if (fragment instanceof TransferSuccessFragment == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.contentContainer, TransferSuccessFragment.newInstance())
+                        .commit();
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }
     }
 
     @Override
     public void setOnClickDoneButtonListener() {
         finish();
+    }
+
+    private void call_checkToken(){
+        Call<HttpService.HttpBinResponse> call_checktoken = HttpService.service.postWithFormJson_checkToken(
+                LoginRegister.check_token,
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
+
+        call_checktoken.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){LoginRegister.check_status_login = true;}
+                else {LoginRegister.check_status_login = false;}
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private AlertDialog checkStatusOnLogin(final AppCompatActivity act, CharSequence title,
+                                           CharSequence message, CharSequence buttonYes){
+        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(act);
+        downloadDialog.setTitle(title).setMessage(message).setPositiveButton(buttonYes, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ((AppCompatActivity) getApplicationContext()).finish();
+            }
+        });
+        return downloadDialog.show();
     }
 }

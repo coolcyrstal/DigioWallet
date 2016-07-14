@@ -1,14 +1,23 @@
 package com.example.chayenjr.digiowallet.Main;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.Main.view.CustomButton;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Service.HttpService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -57,13 +66,46 @@ public class MainHomePageFragment extends Fragment {
         mTransferBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                TransferListener listener = (TransferListener) getActivity();
-                listener.onTransferClickListener();
+                call_checkToken();
+                if(LoginRegister.check_status_login){
+                    TransferListener listener = (TransferListener) getActivity();
+                    listener.onTransferClickListener();
+                }else{
+                    checkStatusOnLogin((AppCompatActivity) getContext(), "You are not login", "Your app run overtime.", "OK");
+                }
             }
         });
     }
 
+    private void call_checkToken(){
+        Call<HttpService.HttpBinResponse> call_checktoken = HttpService.service.postWithFormJson_checkToken(
+                LoginRegister.check_token,
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
 
+        call_checktoken.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){}else {LoginRegister.check_status_login = false;}
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private AlertDialog checkStatusOnLogin(final AppCompatActivity act, CharSequence title,
+                                           CharSequence message, CharSequence buttonYes){
+        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(act);
+        downloadDialog.setTitle(title).setMessage(message).setPositiveButton(buttonYes, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                getActivity().finish();
+            }
+        });
+        return downloadDialog.show();
+    }
 
     private void init(Bundle savedInstanceState) {
         // Init Fragment level's variable(s) here

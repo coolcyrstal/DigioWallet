@@ -15,8 +15,14 @@ import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ListView;
 
+import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.Main.HomePage;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Service.HttpService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class TransferInfoFragment extends Fragment {
 
@@ -40,6 +46,7 @@ public class TransferInfoFragment extends Fragment {
     public static String credit_amount;
     public static String text_note_description;
     public static String from_account_num;
+    public static String to_account_name;
     ListView radiolist_account;
     UserAccountAdapter adapter;
 
@@ -137,6 +144,8 @@ public class TransferInfoFragment extends Fragment {
                 text_note_description = noteDescription.getText().toString();
                 from_account_num = UserAccountAdapter.getTextRadio();
                 Log.d("Radiotext", UserAccountAdapter.getTextRadio());
+
+                sendgetName_receiverAccount();
             }
         });
         radiolist_account = (ListView)rootView.findViewById(R.id.list_account_number);
@@ -154,6 +163,26 @@ public class TransferInfoFragment extends Fragment {
         Log.d("size", ""+HomePage.accountDetails.getAccounts().size());
         adapter.setAccount_number(temp);
         radiolist_account.setAdapter(adapter);
+    }
+
+    private void sendgetName_receiverAccount(){
+        Call<HttpService.HttpBinResponse> call_getAccount = HttpService.service.postWithFormJson_getAccount(
+                LoginRegister.check_token, TransferInfoFragment.to_account_number,
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
+
+        call_getAccount.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){
+                    to_account_name = response.body().getAccountDetails().getName();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
     }
 
     @Override

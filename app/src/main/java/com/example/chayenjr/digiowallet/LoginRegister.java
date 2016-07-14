@@ -59,6 +59,7 @@ public class LoginRegister extends AppCompatActivity {
     EditText text_PIN;
     public static String check_token;
     public static LoginDetails account_info;
+    public static Boolean check_status_login = false;
     MenuView.ItemView logout;
 
 
@@ -118,7 +119,7 @@ public class LoginRegister extends AppCompatActivity {
                 if(response.body().getSuccess()){
                     check_token = response.body().getToken();
                     account_info = response.body().getDetails();
-
+                    check_status_login = true;
                     Intent intent = new Intent(LoginRegister.this, HomePage.class);
                     startActivity(intent);
                 } else{

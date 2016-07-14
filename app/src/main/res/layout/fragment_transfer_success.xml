@@ -49,6 +49,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/dateTime_forsendslip"
                         android:text="00/00/0000 99:99:99"
                         android:textColor="@android:color/black" />
 
@@ -75,6 +76,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/from_accountNumber_forsendslip"
                         android:text="4321****4321"
                         android:textColor="@android:color/black" />
 
@@ -101,6 +103,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/to_account_number_forsendslip"
                         android:text="1234****1234"
                         android:textColor="@android:color/black" />
 
@@ -120,6 +123,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
+                        android:id="@+id/text_toAccountName_forsendslip"
                         android:text="Firstname Lastname"
                         android:textColor="@android:color/black" />
 
@@ -155,6 +159,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/amount_forsendslip"
                         android:text="00.00"
                         android:textColor="@android:color/black" />
 
@@ -181,6 +186,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/amountFee_forsendslip"
                         android:text="0.00"
                         android:textColor="@android:color/black" />
 
@@ -207,6 +213,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:id="@+id/totalAmount_forsendslip"
                         android:text="00.00"
                         android:textColor="@android:color/black"
                         android:textStyle="bold" />
@@ -219,6 +226,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
+                android:id="@+id/textnote_forsendslip"
                 android:background="@android:color/white"
                 android:padding="12dp"
                 android:text="DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription" />

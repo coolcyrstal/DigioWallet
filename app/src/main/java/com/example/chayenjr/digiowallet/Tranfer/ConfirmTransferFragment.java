@@ -17,6 +17,8 @@ import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 
+import java.util.StringTokenizer;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -45,6 +47,8 @@ public class ConfirmTransferFragment extends Fragment {
     private ImageView iconBank;
 
     public static String dateTimeOnTransfer;
+    public static String money_fee;
+    public static String money_total;
 
     Integer[] ic_bank_ID = {
             R.drawable.ic_kbank,
@@ -101,6 +105,41 @@ public class ConfirmTransferFragment extends Fragment {
         return rootView;
     }
 
+    private void init(Bundle savedInstanceState) {
+        // Init Fragment level's variable(s) here
+    }
+
+    @SuppressWarnings("UnusedParameters")
+    private void initInstances(View rootView, Bundle savedInstanceState) {
+        // Init 'View' instance(s) with rootView.findViewById here
+        customerNumber = (TextView) rootView.findViewById(R.id.textCustomerNumber);
+        customerName = (TextView) rootView.findViewById(R.id.textCustomerName);
+        bankAccount = (TextView) rootView.findViewById(R.id.bank_name);
+        creditAmount = (TextView) rootView.findViewById(R.id.textAmount);
+        creditFee = (TextView) rootView.findViewById(R.id.textFee);
+        creditTotal = (TextView) rootView.findViewById(R.id.textTotal);
+        descriptionText = (TextView) rootView.findViewById(R.id.textDescription);
+        textBankName = (TextView)rootView.findViewById(R.id.textBankName);
+        iconBank = (ImageView)rootView.findViewById(R.id.iconBank);
+        btnConfirm = (Button) rootView.findViewById(R.id.btnConfirm);
+    }
+
+    private void setInstance(){
+        customerNumber.setText(TransferInfoFragment.to_account_number);
+        creditAmount.setText(TransferInfoFragment.credit_amount);
+        StringTokenizer splitAmount = new StringTokenizer(TransferInfoFragment.credit_amount, ".");
+        money_fee = creditFee.getText().toString();
+        StringTokenizer splitFee = new StringTokenizer(money_fee, ".");
+        int total = Integer.parseInt(splitAmount.nextToken()) + Integer.parseInt(splitFee.nextToken());
+        money_total = String.valueOf(total) + ".00";
+        creditTotal.setText(money_total);
+        descriptionText.setText(TransferInfoFragment.text_note_description);
+        customerName.setText(TransferInfoFragment.to_account_name);
+
+        textBankName.setText(TransferInfoFragment.bankName[TransferInfoFragment.gallery.getSelectedItemPosition()]);
+        iconBank.setImageResource(ic_bank_ID[TransferInfoFragment.gallery.getSelectedItemPosition()]);
+    }
+
     private void sendTransfer(){
         Call<HttpService.HttpBinResponse> call_transfer = HttpService.service.postWithFormJson_transaction_transfer(
                 LoginRegister.check_token, TransferInfoFragment.from_account_num,
@@ -111,7 +150,7 @@ public class ConfirmTransferFragment extends Fragment {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
                 if(response.body().getSuccess()){
-                    dateTimeOnTransfer = response.body().getDatetime();
+                    dateTimeOnTransfer = response.body().getDatetime().split(" GMT")[0];
                     OnFragmentListener listener = (OnFragmentListener) getActivity();
                     listener.setOnClickConfirmButton();
                 } else{
@@ -135,35 +174,6 @@ public class ConfirmTransferFragment extends Fragment {
             }
         });
         return downloadDialog.show();
-    }
-
-    private void init(Bundle savedInstanceState) {
-        // Init Fragment level's variable(s) here
-    }
-
-    @SuppressWarnings("UnusedParameters")
-    private void initInstances(View rootView, Bundle savedInstanceState) {
-        // Init 'View' instance(s) with rootView.findViewById here
-        customerNumber = (TextView) rootView.findViewById(R.id.textCustomerNumber);
-        customerName = (TextView) rootView.findViewById(R.id.textCustomerName);
-        bankAccount = (TextView) rootView.findViewById(R.id.bank_name);
-        creditAmount = (TextView) rootView.findViewById(R.id.textAmount);
-        creditFee = (TextView) rootView.findViewById(R.id.textFee);
-        creditTotal = (TextView) rootView.findViewById(R.id.textTotal);
-        descriptionText = (TextView) rootView.findViewById(R.id.textDescription);
-        textBankName = (TextView)rootView.findViewById(R.id.textBankName);
-        iconBank = (ImageView)rootView.findViewById(R.id.iconBank);
-        btnConfirm = (Button) rootView.findViewById(R.id.btnConfirm);
-    }
-
-    private void setInstance(){
-        customerNumber.setText(TransferInfoFragment.to_account_number);
-        creditAmount.setText(TransferInfoFragment.credit_amount);
-        descriptionText.setText(TransferInfoFragment.text_note_description);
-        customerName.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());
-
-        textBankName.setText(TransferInfoFragment.bankName[TransferInfoFragment.gallery.getSelectedItemPosition()]);
-        iconBank.setImageResource(ic_bank_ID[TransferInfoFragment.gallery.getSelectedItemPosition()]);
     }
 
     @Override

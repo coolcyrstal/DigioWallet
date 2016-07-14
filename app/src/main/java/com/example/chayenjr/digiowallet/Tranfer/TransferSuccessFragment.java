@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.R;
 
@@ -23,6 +24,15 @@ public class TransferSuccessFragment extends Fragment {
     }
 
     private Button btnDone;
+    TextView to_accountName_forsendslip;
+    TextView textnote_forsendslip;
+    TextView amount_forsendslip;
+    TextView amountFee_forsendslip;
+    TextView amountTotal_forsendslip;
+    TextView to_accountNumber_forsendslip;
+    TextView from_accountNumber_forsendslip;
+    TextView dateTime_forsendslip;
+
 
     public TransferSuccessFragment() {
         super();
@@ -50,6 +60,7 @@ public class TransferSuccessFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_transfer_success, container, false);
         initInstances(rootView, savedInstanceState);
+        setInstances();
         return rootView;
     }
 
@@ -68,6 +79,25 @@ public class TransferSuccessFragment extends Fragment {
                 listener.setOnClickDoneButtonListener();
             }
         });
+        dateTime_forsendslip = (TextView)rootView.findViewById(R.id.dateTime_forsendslip);
+        from_accountNumber_forsendslip = (TextView)rootView.findViewById(R.id.from_accountNumber_forsendslip);
+        to_accountNumber_forsendslip = (TextView)rootView.findViewById(R.id.to_account_number_forsendslip);
+        to_accountName_forsendslip = (TextView)rootView.findViewById(R.id.text_toAccountName_forsendslip);
+        amount_forsendslip = (TextView)rootView.findViewById(R.id.amount_forsendslip);
+        amountFee_forsendslip = (TextView)rootView.findViewById(R.id.amountFee_forsendslip);
+        amountTotal_forsendslip = (TextView)rootView.findViewById(R.id.totalAmount_forsendslip);
+        textnote_forsendslip = (TextView)rootView.findViewById(R.id.textnote_forsendslip);
+    }
+
+    private void setInstances(){
+        dateTime_forsendslip.setText(ConfirmTransferFragment.dateTimeOnTransfer);
+        from_accountNumber_forsendslip.setText(TransferInfoFragment.from_account_num);
+        to_accountNumber_forsendslip.setText(TransferInfoFragment.to_account_number);
+        to_accountName_forsendslip.setText(TransferInfoFragment.to_account_name);
+        amount_forsendslip.setText(TransferInfoFragment.credit_amount);
+        amountFee_forsendslip.setText(ConfirmTransferFragment.money_fee);
+        amountTotal_forsendslip.setText(ConfirmTransferFragment.money_total);
+        textnote_forsendslip.setText(TransferInfoFragment.text_note_description);
     }
 
     @Override

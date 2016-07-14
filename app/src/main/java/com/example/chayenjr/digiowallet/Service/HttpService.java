@@ -256,6 +256,15 @@ public class HttpService {
                 @Field("token") String token
         );
 
+        //mobile service doc 16
+        @FormUrlEncoded
+        @POST("mobile_checkToken")
+        Call<HttpBinResponse> postWithFormJson_checkToken(
+                @Field("token") String token,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
         // POST with a JSON body
         @POST("mobile_register")
         Call<HttpBinResponse> postWithJson(
