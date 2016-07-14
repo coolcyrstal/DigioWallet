@@ -36,9 +36,10 @@ public class TransferInfoFragment extends Fragment {
     private String mParam2;
     public static Gallery gallery;
     AppCompatTextView tvSelectBankName;
-    public static String account_number;
+    public static String to_account_number;
     public static String credit_amount;
     public static String text_note_description;
+    public static String from_account_num;
     ListView radiolist_account;
     UserAccountAdapter adapter;
 
@@ -131,9 +132,11 @@ public class TransferInfoFragment extends Fragment {
             public void onClick(View v) {
                 OnFragmentListener listener = (OnFragmentListener) getActivity();
                 listener.setOnClickButtonNext();
-                account_number = accountNumber.getText().toString();
+                to_account_number = accountNumber.getText().toString();
                 credit_amount = creditAmount.getText().toString();
                 text_note_description = noteDescription.getText().toString();
+                from_account_num = UserAccountAdapter.getTextRadio();
+                Log.d("Radiotext", UserAccountAdapter.getTextRadio());
             }
         });
         radiolist_account = (ListView)rootView.findViewById(R.id.list_account_number);

@@ -1,8 +1,11 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +15,11 @@ import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Service.HttpService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 /**
@@ -35,6 +43,8 @@ public class ConfirmTransferFragment extends Fragment {
     private TextView descriptionText;
     private TextView textBankName;
     private ImageView iconBank;
+
+    public static String dateTimeOnTransfer;
 
     Integer[] ic_bank_ID = {
             R.drawable.ic_kbank,
@@ -82,14 +92,49 @@ public class ConfirmTransferFragment extends Fragment {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OnFragmentListener listener = (OnFragmentListener) getActivity();
-                listener.setOnClickConfirmButton();
+                sendTransfer();
             }
         });
 
         setInstance();
 
         return rootView;
+    }
+
+    private void sendTransfer(){
+        Call<HttpService.HttpBinResponse> call_transfer = HttpService.service.postWithFormJson_transaction_transfer(
+                LoginRegister.check_token, TransferInfoFragment.from_account_num,
+                TransferInfoFragment.to_account_number, TransferInfoFragment.credit_amount,
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
+
+        call_transfer.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){
+                    dateTimeOnTransfer = response.body().getDatetime();
+                    OnFragmentListener listener = (OnFragmentListener) getActivity();
+                    listener.setOnClickConfirmButton();
+                } else{
+                    checkTransfer((AppCompatActivity) getContext(), "Transfer not success", "Please check you have login or check account number.", "OK");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private AlertDialog checkTransfer(final AppCompatActivity act, CharSequence title,
+                                      CharSequence message, CharSequence buttonYes){
+        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(act);
+        downloadDialog.setTitle(title).setMessage(message).setPositiveButton(buttonYes, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+            }
+        });
+        return downloadDialog.show();
     }
 
     private void init(Bundle savedInstanceState) {
@@ -112,7 +157,7 @@ public class ConfirmTransferFragment extends Fragment {
     }
 
     private void setInstance(){
-        customerNumber.setText(TransferInfoFragment.account_number);
+        customerNumber.setText(TransferInfoFragment.to_account_number);
         creditAmount.setText(TransferInfoFragment.credit_amount);
         descriptionText.setText(TransferInfoFragment.text_note_description);
         customerName.setText(LoginRegister.account_info.getF_NAME() + " "  + LoginRegister.account_info.getL_NAME());

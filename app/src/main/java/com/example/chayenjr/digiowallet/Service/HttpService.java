@@ -52,6 +52,7 @@ public class HttpService {
         @SerializedName("token") private String token;
         @SerializedName("details") private LoginDetails details;
         @SerializedName("account_details") private AccountDetails accountDetails;
+        @SerializedName("datetime") private String datetime;
 
 
         public Boolean getSuccess() {
@@ -92,6 +93,10 @@ public class HttpService {
 
         public void setAccountDetails(AccountDetails accountDetails) {
             this.accountDetails = accountDetails;
+        }
+
+        public String getDatetime() {
+            return datetime;
         }
     }
 
@@ -224,6 +229,18 @@ public class HttpService {
         Call<HttpBinResponse> postWithFormJson_getAccount(
                 @Field("token") String token,
                 @Field("Acc_no") String Acc_no,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
+        );
+
+        //mobile service doc 10
+        @FormUrlEncoded
+        @POST("mobile_transaction/transfer")
+        Call<HttpBinResponse> postWithFormJson_transaction_transfer(
+                @Field("token") String token,
+                @Field("from_Acc_no") String from_Acc_no,
+                @Field("to_Acc_no") String to_Acc_no,
+                @Field("amount") String amount,
                 @Field("versions") String versions,
                 @Field("nonce") String nonce
         );

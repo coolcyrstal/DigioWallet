@@ -56,4 +56,8 @@ public class UserAccountAdapter extends BaseAdapter{
         //use position for show bank_icon account, but in mocked-up use digio for default
         image_bank_account[account_number.length-1] = R.drawable.ic_digio;
     }
+
+    public static String getTextRadio(){
+        return AccountRadioList.getTextRadio();
+    }
 }

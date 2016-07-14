@@ -1,13 +1,13 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
-import com.example.chayenjr.digiowallet.Main.MainHomePageFragment;
 import com.example.chayenjr.digiowallet.R;
 
 public class TranferActivity extends AppCompatActivity implements TransferFragment.OnFragmentInteractionListener,
@@ -188,7 +187,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
 
             if (fragment instanceof PinConfirmTransfer == false)
                 getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.contentContainer, ConfirmTransferFragment.newInstance(accountNumber, amount, note))
+                        .replace(R.id.contentContainer, PinConfirmTransfer.newInstance())
                         .addToBackStack(null)
                         .commit();
 

@@ -19,7 +19,7 @@ import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
 public class AccountRadioList extends BaseCustomViewGroup {
 
     private RadioGroup radioGroup;
-    private RadioButton radio_bank_account;
+    private static RadioButton radio_bank_account;
     private TextView textView2;
 
     public AccountRadioList(Context context) {
@@ -71,4 +71,7 @@ public class AccountRadioList extends BaseCustomViewGroup {
         radio_bank_account.setText(text);
     }
 
+    public static String getTextRadio(){
+        return ""+radio_bank_account.getText();
+    }
 }
