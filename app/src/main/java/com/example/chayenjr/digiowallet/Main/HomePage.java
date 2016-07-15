@@ -40,14 +40,14 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     static TextView account_name;
     static TextView account_citizen_id;
     static TextView username;
-    static TextView usermoney;
+    public static TextView usermoney;
     AppCompatTextView mTextViewName, mTextViewMoney, mTitle;
     View view;
 
     ViewPager viewPager;
     private TabLayout tabLayout;
     public static AccountDetails accountDetails;
-    static String account_details;
+    public static String account_details;
     RelativeLayout mViewInformation;
 
 

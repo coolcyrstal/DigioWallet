@@ -11,13 +11,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
+import com.example.chayenjr.digiowallet.Main.HomePage;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 
@@ -199,7 +199,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
             checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }
 
-        if (!accountNumber.equals("") && !amount.equals("")) {
+        if (!accountNumber.equals("") && !amount.equals("") && !TransferInfoFragment.from_account_num.equals("")) {
             call_checkToken();
             if(LoginRegister.check_status_login){
                 if (fragment instanceof PinConfirmTransfer == false)
@@ -211,7 +211,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
                 checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
             }
         } else {
-            Toast.makeText(TranferActivity.this, "Please Input Text", Toast.LENGTH_SHORT).show();
+            Toast.makeText(TranferActivity.this, "Please fill a blank.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -252,6 +252,9 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
     @Override
     public void setOnClickDoneButtonListener() {
         finish();
+        HomePage.call_account();
+//        Log.d("account_balance", HomePage.account_details);
+        HomePage.usermoney.setText(HomePage.account_details);
     }
 
     private void call_checkToken(){
@@ -279,7 +282,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
         downloadDialog.setTitle(title).setMessage(message).setPositiveButton(buttonYes, new DialogInterface.OnClickListener(){
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                ((AppCompatActivity) getApplicationContext()).finish();
+                finish();
             }
         });
         return downloadDialog.show();
