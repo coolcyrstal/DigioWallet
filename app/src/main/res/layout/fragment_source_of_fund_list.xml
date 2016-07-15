@@ -1,8 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorGrey">
 
+    <TextView
+        android:textColor="@android:color/black"
+        android:gravity="center_horizontal"
+        android:padding="15dp"
+        android:text="Tab to make default source of fund"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white">
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@android:color/white"
+            android:paddingLeft="12dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+
+            <ListView
+                android:id="@+id/list_account_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </ListView>
+
+        </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>

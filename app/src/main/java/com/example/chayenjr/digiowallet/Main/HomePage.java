@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
+import com.example.chayenjr.digiowallet.Main.SourceOfFund.SourceOfFundActivity;
 import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
@@ -234,9 +235,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             // Handle the camera action
         }else if (id == R.id.setting) {
 
-
         }else if (id == R.id.source_of_fund) {
-
+            goSourceOfFund();
         }else if (id == R.id.privacy) {
 
         }else if (id == R.id.about) {
@@ -257,6 +257,11 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public void onTransferClickListener() {
         Intent intent = new Intent(HomePage.this, TranferActivity.class);
+        startActivity(intent);
+    }
+
+    private void goSourceOfFund(){
+        Intent intent = new Intent(HomePage.this, SourceOfFundActivity.class);
         startActivity(intent);
     }
 }

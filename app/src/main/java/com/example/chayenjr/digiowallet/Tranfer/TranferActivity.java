@@ -199,7 +199,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
             checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }
 
-        if (!accountNumber.equals("") && !amount.equals("") && !TransferInfoFragment.from_account_num.equals("")) {
+        if (!accountNumber.equals("") && !amount.equals("")) {
             call_checkToken();
             if(LoginRegister.check_status_login){
                 if (fragment instanceof PinConfirmTransfer == false)

@@ -28,6 +28,9 @@
         <activity
             android:name=".Tranfer.TranferActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Main.SourceOfFund.SourceOfFundActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

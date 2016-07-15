@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/amount_forsendslip"
-                        android:text="00.00"
+                        android:text="0.00"
                         android:textColor="@android:color/black" />
 
                 </LinearLayout>
@@ -214,7 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/totalAmount_forsendslip"
-                        android:text="00.00"
+                        android:text="0.00"
                         android:textColor="@android:color/black"
                         android:textStyle="bold" />
 
