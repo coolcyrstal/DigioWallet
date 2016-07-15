@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.widget.Checkable;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -16,9 +17,8 @@ import com.inthecheesefactory.thecheeselibrary.view.state.BundleSavedState;
 /**
  * Created by Chayenjr on 13/7/2559.
  */
-public class AccountRadioList extends BaseCustomViewGroup {
+public class AccountRadioList extends BaseCustomViewGroup implements Checkable{
 
-    private RadioGroup radioGroup;
     private static RadioButton radio_bank_account;
     private TextView textView2;
 
@@ -46,7 +46,6 @@ public class AccountRadioList extends BaseCustomViewGroup {
 
     private void initInstances() {
         // findViewById here
-        radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         radio_bank_account = (RadioButton) findViewById(R.id.radioButton);
     }
 
@@ -72,6 +71,23 @@ public class AccountRadioList extends BaseCustomViewGroup {
     }
 
     public static String getTextRadio(){
-        return ""+radio_bank_account.getText();
+        String s = "" + radio_bank_account.getText();
+        return s ;
     }
+
+    @Override
+    public void setChecked(boolean checked) {
+        radio_bank_account.setChecked(checked);
+    }
+
+    @Override
+    public boolean isChecked() {
+        return radio_bank_account.isChecked();
+    }
+
+    @Override
+    public void toggle() {
+        radio_bank_account.toggle();
+    }
+
 }

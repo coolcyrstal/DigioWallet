@@ -89,10 +89,6 @@ public class ConfirmTransferFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_confirm_transfer, container, false);
         initInstances(rootView, savedInstanceState);
 
-        customerNumber.setText(getArguments().getString("account"));
-        creditAmount.setText(getArguments().getString("amount"));
-        descriptionText.setText(getArguments().getString("note"));
-
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

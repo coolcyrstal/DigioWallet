@@ -22,10 +22,12 @@
             </intent-filter>
         </activity>
         <activity android:name=".register.RegisterPage" />
-        <activity android:name=".Main.HomePage"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
-        <activity android:name=".Tranfer.TranferActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity
+            android:name=".Main.HomePage"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".Tranfer.TranferActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
     </application>
 
 </manifest>

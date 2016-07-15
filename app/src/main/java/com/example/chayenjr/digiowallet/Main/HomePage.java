@@ -160,7 +160,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                 super.onDrawerOpened(drawerView);
             }
         };
-        mDrawerLayout.setDrawerListener(actionBarDrawerToggle);
+        mDrawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
 
     }
@@ -227,6 +227,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
+//        Toast.makeText(HomePage.this, "" + id + " " + R.id.source_of_fund, Toast.LENGTH_SHORT).show();
 
         if (id == R.id.profile) {
 

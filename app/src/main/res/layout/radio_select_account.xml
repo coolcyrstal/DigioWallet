@@ -9,33 +9,30 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <RadioGroup
+        <RadioButton
+            android:id="@+id/radioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageView"
-            android:weightSum="1"
-            android:id="@+id/radioGroup">
-
-            <RadioButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="4321****4321"
-                android:id="@+id/radioButton"
-                android:checked="false"
-                android:textSize="15dp"
-                android:padding="10dp"/>
-        </RadioGroup>
+            android:padding="10dp"
+            android:text="4321****4321"
+            android:textSize="15dp"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            />
 
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <ImageView
             android:id="@+id/iconBank_account"
-            android:layout_gravity="center"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_gravity="center"
             android:src="@drawable/ic_digio" />
+
     </LinearLayout>
+
 </LinearLayout>

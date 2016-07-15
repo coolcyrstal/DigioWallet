@@ -6,133 +6,140 @@
     android:background="@color/colorGrey"
     tools:context="com.example.chayenjr.digiowallet.Tranfer.TransferInfoFragment">
 
-
-    <RelativeLayout
+    <ScrollView
+        android:fillViewport="true"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
+
         <RelativeLayout
-            android:id="@+id/view_select_bank"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white">
-
-            <android.support.v7.widget.AppCompatTextView
-                android:paddingTop="8dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:id="@+id/view_select_bank"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/select_bank"
-                android:gravity="center_horizontal"
-                android:textColor="@color/gray_text"
-                android:id="@+id/select"
-                />
+                android:background="@android:color/white">
 
-            <Gallery
+                <android.support.v7.widget.AppCompatTextView
+                    android:paddingTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/select_bank"
+                    android:gravity="center_horizontal"
+                    android:textColor="@color/gray_text"
+                    android:id="@+id/select"
+                    />
+
+                <Gallery
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:spacing="5dp"
+                    android:layout_below="@+id/select"
+                    android:id="@+id/gallery_bank" >
+                </Gallery>
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:layout_marginTop="4dp"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:gravity="center_horizontal"
+                    android:textColor="@android:color/black"
+                    android:layout_below="@+id/gallery_bank"
+                    android:id="@+id/bank_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_below="@+id/view_select_bank"
+                android:layout_marginTop="8dp"
+                android:id="@+id/view_sendamount_toaccount"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:spacing="5dp"
-                android:layout_below="@+id/select"
-                android:id="@+id/gallery_bank" >
-            </Gallery>
+                android:background="@android:color/white"
+                android:orientation="vertical"
+                android:padding="12dp">
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/editAccountNumber"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:hint="@string/to_account_no"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"/>
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/editAmount"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:layout_marginTop="6dp"
+                    android:hint="@string/amount"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15dp"/>
+            </LinearLayout>
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_marginTop="4dp"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:gravity="center_horizontal"
-                android:textColor="@android:color/black"
-                android:layout_below="@+id/gallery_bank"
-                android:id="@+id/bank_name"
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/view_sendamount_toaccount"
+                android:layout_above="@+id/note_description"
+                android:background="@android:color/white"
+                android:paddingLeft="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="5dp"
+                android:paddingTop="5dp">
+
+                <ListView
+                    android:id="@+id/list_account_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </ListView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_above="@+id/btn_next"
+                android:id="@+id/note_description"
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="4dp"/>
+                android:background="@android:color/white"
+                android:paddingBottom="40dp"
+                android:orientation="vertical"
+                android:layout_marginBottom="20dp">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/editNote"
+                    android:hint="@string/note"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="8dp"/>
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_next"
+                android:background="@drawable/button_selector_test"
+                android:text="@string/next"
+                android:textColor="@android:color/white"
+                android:textSize="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
         </RelativeLayout>
 
-        <LinearLayout
-            android:layout_below="@+id/view_select_bank"
-            android:layout_marginTop="8dp"
-            android:id="@+id/view_sendamount_toaccount"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:orientation="vertical"
-            android:padding="12dp">
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/editAccountNumber"
-                android:inputType="number"
-                android:singleLine="true"
-                android:hint="@string/to_account_no"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"/>
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/editAmount"
-                android:inputType="number"
-                android:singleLine="true"
-                android:layout_marginTop="6dp"
-                android:hint="@string/amount"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textSize="15dp"/>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_below="@+id/view_sendamount_toaccount"
-            android:layout_above="@+id/note_description"
-            android:background="@android:color/white"
-            android:paddingLeft="12dp"
-            android:paddingRight="12dp"
-            android:paddingBottom="5dp"
-            android:paddingTop="5dp">
-
-            <ListView
-                android:id="@+id/list_account_number"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </ListView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_above="@+id/btn_next"
-            android:id="@+id/note_description"
-            android:layout_marginTop="8dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:paddingBottom="40dp"
-            android:orientation="vertical"
-            android:layout_marginBottom="20dp">
-
-            <android.support.v7.widget.AppCompatEditText
-                android:id="@+id/editNote"
-                android:hint="@string/note"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="12dp"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginTop="8dp"/>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/btn_next"
-            android:background="@drawable/button_selector_test"
-            android:text="@string/next"
-            android:textColor="@android:color/white"
-            android:textSize="16dp"
-            android:layout_alignParentBottom="true"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-    </RelativeLayout>
+    </ScrollView>
 
 </FrameLayout>

@@ -46,6 +46,7 @@
                 android:layout_below="@+id/textFirstname"/>
 
             <EditText
+                android:maxLength="13"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:id="@+id/textCitizenID"

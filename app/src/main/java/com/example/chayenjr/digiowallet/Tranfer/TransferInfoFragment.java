@@ -1,7 +1,9 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.AppCompatTextView;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Gallery;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.Main.HomePage;
@@ -23,6 +26,9 @@ import com.example.chayenjr.digiowallet.Service.HttpService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class TransferInfoFragment extends Fragment {
 
@@ -48,7 +54,7 @@ public class TransferInfoFragment extends Fragment {
     public static String from_account_num;
     public static String to_account_name;
     ListView radiolist_account;
-    UserAccountAdapter adapter;
+    RadioAdapter adapter;
 
     private TransferFragment.OnFragmentInteractionListener mListener;
 
@@ -125,6 +131,14 @@ public class TransferInfoFragment extends Fragment {
         bankAdapter = new BankAdapter(getContext(),imageIDs,gallery);
         gallery.setAdapter(bankAdapter);
         gallery.setSelection(2);
+        gallery.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Log.d("gallery",
+                "Gallery's Position " + gallery.getSelectedItemPosition() +
+                "Resource is " + getResources());
+            }
+        });
     }
 
     private void initInstances(View rootView) {
@@ -142,14 +156,13 @@ public class TransferInfoFragment extends Fragment {
                 to_account_number = accountNumber.getText().toString();
                 credit_amount = creditAmount.getText().toString();
                 text_note_description = noteDescription.getText().toString();
-                from_account_num = UserAccountAdapter.getTextRadio();
-                Log.d("Radiotext", UserAccountAdapter.getTextRadio());
+                from_account_num = adapter.getTextRadio(radiolist_account.getCheckedItemPosition());
+                //Log.d("Radiotext", UserAccountAdapter.getTextRadio());
 
                 sendgetName_receiverAccount();
             }
         });
         radiolist_account = (ListView)rootView.findViewById(R.id.list_account_number);
-        adapter = new UserAccountAdapter();
         getUserAccountNumber();
     }
 
@@ -161,8 +174,10 @@ public class TransferInfoFragment extends Fragment {
             i++;
         }
         Log.d("size", ""+HomePage.accountDetails.getAccounts().size());
+        adapter = new RadioAdapter();
         adapter.setAccount_number(temp);
         radiolist_account.setAdapter(adapter);
+        radiolist_account.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
     }
 
     private void sendgetName_receiverAccount(){

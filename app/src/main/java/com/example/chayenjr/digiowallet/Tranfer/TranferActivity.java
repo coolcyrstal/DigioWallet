@@ -59,7 +59,6 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
 
     private void initInstance() {
         initToolbar();
-
     }
 
     /**************
@@ -80,7 +79,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
                         LoginRegister.account_info.getCard_id().length()));
 
         setSupportActionBar(mToolbar);
-        mToolbar.setTitle("Transfer");
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         setDrawer();
     }
@@ -130,11 +129,11 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
         return false;
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        getMenuInflater().inflate(R.menu.menu_main, menu);
+//        return true;
+//    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         if (actionBarDrawerToggle.onOptionsItemSelected(item)) {
@@ -200,7 +199,7 @@ public class TranferActivity extends AppCompatActivity implements TransferFragme
             checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }
 
-        if (accountNumber != "" && amount != "") {
+        if (!accountNumber.equals("") && !amount.equals("")) {
             call_checkToken();
             if(LoginRegister.check_status_login){
                 if (fragment instanceof PinConfirmTransfer == false)
