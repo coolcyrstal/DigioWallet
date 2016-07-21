@@ -7,8 +7,12 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.ContextMenu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.R;
 
@@ -19,6 +23,7 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
     private NavigationView navigationView;
     private View view;
     private ActionBarDrawerToggle actionBarDrawerToggle;
+    Button add_new_account;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +52,37 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         setDrawer();
+
+        add_new_account = (Button)findViewById(R.id.action_add_account);
+        add_new_account.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Button btn_select_type = (Button)findViewById(R.id.btn_select_type);
+                openContextMenu(btn_select_type);
+                registerForContextMenu(btn_select_type);
+            }
+        });
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        Log.d("context menu", "active");
+        menu.setHeaderTitle("Select Type2");
+        menu.add(0, v.getId(), 0, "Add Bank Account");
+        menu.add(0, v.getId(), 0, "Add Credit Card");
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        if (item.getTitle() == "Add Bank Account") {
+            Toast.makeText(this, "Action 1 invoked", Toast.LENGTH_SHORT).show();
+        } else if (item.getTitle() == "Add Credit Card") {
+            Toast.makeText(this, "Action 2 invoked", Toast.LENGTH_SHORT).show();
+        } else {
+            return false;
+        }
+        return true;
     }
 
     private void setDrawer() {

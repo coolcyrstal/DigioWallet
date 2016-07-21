@@ -35,5 +35,6 @@
     <string name="amount">Amount</string>
     <string name="next">Next</string>
     <string name="note">Note</string>
+    <string name="action_new">New Note</string>
 
 </resources>

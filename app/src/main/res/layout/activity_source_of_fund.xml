@@ -32,8 +32,18 @@
                     android:layout_gravity="center"
                     android:text="Source of Fund"
                     android:textColor="@android:color/black"
-                    android:textSize="18dp"
-                    />
+                    android:textSize="18dp" />
+
+                <Button
+                    android:id="@+id/action_add_account"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/ic_action_new"
+                    android:textColor="#000"
+                    android:layout_gravity="right"/>
 
             </android.support.v7.widget.Toolbar>
 
