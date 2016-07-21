@@ -6,22 +6,28 @@
     android:layout_height="match_parent"
     android:background="@color/colorGrey">
 
-    <TextView
-        android:textColor="@android:color/black"
-        android:gravity="center_horizontal"
-        android:padding="15dp"
-        android:text="Tab to make default source of fund"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white">
 
+        <TextView
+            android:textColor="@android:color/black"
+            android:id="@+id/text_tab_select_default"
+            android:background="@color/colorGrey"
+            android:gravity="center_horizontal"
+            android:padding="15dp"
+            android:text="Tab to make default source of fund"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/text_tab_select_default"
+            android:layout_above="@+id/set_default_acc_button"
             android:layout_marginTop="8dp"
             android:background="@android:color/white"
             android:paddingLeft="12dp"
@@ -30,12 +36,22 @@
             android:paddingTop="5dp">
 
             <ListView
-                android:id="@+id/list_account_number"
+                android:id="@+id/list_account_number_sourceOfFund"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
             </ListView>
-
         </LinearLayout>
+
+        <Button
+            android:id="@+id/set_default_acc_button"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_width="200dp"
+            android:layout_height="40dp"
+            android:text="Set Account Default"
+            android:background="#CCC"
+            android:textColor="#000"
+            android:layout_gravity="bottom"/>
     </RelativeLayout>
 </LinearLayout>

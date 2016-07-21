@@ -11,6 +11,7 @@ public class LoginDetails {
     @SerializedName("Mobile") private String Mobile;
     @SerializedName("Card_id") private String Card_id;
     @SerializedName("Last_login") private String Last_login;
+    @SerializedName("Default_account") private String Default_account;
 
     public LoginDetails(){
 
@@ -54,5 +55,9 @@ public class LoginDetails {
 
     public void setLast_login(String last_login) {
         Last_login = last_login;
+    }
+
+    public String getDefault_account() {
+        return Default_account;
     }
 }

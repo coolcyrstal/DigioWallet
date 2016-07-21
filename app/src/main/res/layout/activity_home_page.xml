@@ -73,7 +73,7 @@
                         android:layout_centerHorizontal="true"
                         android:textSize="30sp"
                         android:textStyle="bold"
-                        android:text="1,500.50"
+                        android:text="0.00"
                         android:textColor="@android:color/black"/>
 
                 </LinearLayout>

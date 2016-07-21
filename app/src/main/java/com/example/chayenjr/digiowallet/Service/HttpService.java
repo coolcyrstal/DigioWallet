@@ -30,7 +30,7 @@ import retrofit2.http.Query;
  * Created by Chayenjr on 6/7/2559.
  */
 public class HttpService {
-    public static final String API_URL = "http://uat-uniwalletserver.digio.co.th:3300/service/";
+    public static final String API_URL = "http://192.168.1.40:3300/service/";
     public static HttpService instance = null;
     private static Map<String, String> headers = new HashMap<String, String>();
     public static HttpBinService service;
@@ -53,6 +53,7 @@ public class HttpService {
         @SerializedName("details") private LoginDetails details;
         @SerializedName("account_details") private AccountDetails accountDetails;
         @SerializedName("datetime") private String datetime;
+        @SerializedName("Default_account") private String default_account;
 
 
         public Boolean getSuccess() {
@@ -97,6 +98,10 @@ public class HttpService {
 
         public String getDatetime() {
             return datetime;
+        }
+
+        public String getDefault_account() {
+            return default_account;
         }
     }
 
@@ -254,6 +259,16 @@ public class HttpService {
                 @Field("versions") String versions,
                 @Field("nonce") String nonce,
                 @Field("token") String token
+        );
+
+        //mobile service doc 14
+        @FormUrlEncoded
+        @POST("mobile_setAccount")
+        Call<HttpBinResponse> postWithFormJson_setDefaultAccount(
+                @Field("token") String token,
+                @Field("Acc_no") String Acc_no,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce
         );
 
         //mobile service doc 16

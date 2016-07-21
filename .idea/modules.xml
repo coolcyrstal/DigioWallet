@@ -5,6 +5,7 @@
       <module fileurl="file://$PROJECT_DIR$/DigioWallet.iml" filepath="$PROJECT_DIR$/DigioWallet.iml" />
       <module fileurl="file://$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" filepath="$PROJECT_DIR$/TheCheeseLibrary/TheCheeseLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/digiowallet_bitbucket.iml" filepath="$PROJECT_DIR$/digiowallet_bitbucket.iml" />
     </modules>
   </component>
 </project>

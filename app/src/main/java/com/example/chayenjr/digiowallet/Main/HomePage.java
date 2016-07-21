@@ -56,8 +56,8 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
-        call_account();
         initialize();
+        call_account();
         setToolbar();
         setDrawer();
         setViewPager();
@@ -176,7 +176,16 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
                 if(response.body().getSuccess()){
                     accountDetails = response.body().getAccountDetails();
-                    account_details = accountDetails.getAccounts().get(0).getAvaliable_balance();
+                    if(response.body().getDefault_account().equals(" ")){
+                        account_details = accountDetails.getAccounts().get(0).getAvaliable_balance();
+                    }else{
+                        int i = 0;
+                        while(!response.body().getDefault_account()
+                                .equals(accountDetails.getAccounts().get(i).getNumber())){
+                            i++;
+                        }
+                        account_details = accountDetails.getAccounts().get(i).getAvaliable_balance();
+                    }
                 } else{
                     account_details = "0.00";
                 }
