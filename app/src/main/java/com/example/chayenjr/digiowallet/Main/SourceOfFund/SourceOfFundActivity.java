@@ -2,6 +2,7 @@ package com.example.chayenjr.digiowallet.Main.SourceOfFund;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -76,7 +77,14 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         if (item.getTitle() == "Add Bank Account") {
-            Toast.makeText(this, "Action 1 invoked", Toast.LENGTH_SHORT).show();
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.source_of_fund_contentContainer);
+
+            if (fragment instanceof SelectBankPage == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.source_of_fund_contentContainer, SelectBankPage.newInstance())
+                        .commit();
+            }
         } else if (item.getTitle() == "Add Credit Card") {
             Toast.makeText(this, "Action 2 invoked", Toast.LENGTH_SHORT).show();
         } else {

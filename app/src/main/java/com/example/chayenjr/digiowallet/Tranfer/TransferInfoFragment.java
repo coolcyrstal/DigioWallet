@@ -58,6 +58,7 @@ public class TransferInfoFragment extends Fragment {
             R.drawable.scb_selector,
             R.drawable.krungsri_selector,
             R.drawable.tbank_selector,
+            R.drawable.bbl_selector,
             R.drawable.digio_selector
     };
 
@@ -67,6 +68,7 @@ public class TransferInfoFragment extends Fragment {
             R.string.scb,
             R.string.krungsri,
             R.string.tbank,
+            R.string.bbl,
             R.string.digio
     };
 

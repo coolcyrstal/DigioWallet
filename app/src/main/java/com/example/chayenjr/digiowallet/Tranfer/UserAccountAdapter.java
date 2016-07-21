@@ -1,15 +1,11 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
-import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Checkable;
 
 import com.example.chayenjr.digiowallet.R;
-
-import java.util.List;
 
 /**
  * Created by Chayenjr on 13/7/2559.
@@ -25,6 +21,7 @@ public class UserAccountAdapter extends BaseAdapter {
             R.drawable.ic_scb,
             R.drawable.ic_krungsri,
             R.drawable.ic_tbank,
+            R.drawable.ic_bbl,
             R.drawable.ic_digio
     };
     private boolean CheckToken;
