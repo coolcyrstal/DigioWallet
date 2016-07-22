@@ -8,4 +8,5 @@
     <color name="gray_text">#a1a1a1</color>
     <color name="button_color">#fd4867</color>
     <color name="button_transparent">#80000000</color>
+    <color name="grey_text_bank">#444</color>
 </resources>

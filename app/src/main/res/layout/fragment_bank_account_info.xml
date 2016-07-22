@@ -1,0 +1,93 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.chayenjr.digiowallet.Main.SourceOfFund.BankAccountInfo">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/layout_add_bank_account"
+        android:background="@color/colorGrey">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:id="@+id/digio_banner"
+            android:src="@drawable/digio_banner" />
+
+        <LinearLayout
+            android:layout_below="@+id/digio_banner"
+            android:layout_marginTop="15dp"
+            android:id="@+id/account_bank_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/white"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editAccountNumber"
+                android:inputType="number"
+                android:singleLine="true"
+                android:hint="@string/account_no"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"/>
+            <android.support.v7.widget.AppCompatEditText
+                android:id="@+id/editAmount"
+                android:inputType="number"
+                android:singleLine="true"
+                android:layout_marginTop="6dp"
+                android:hint="@string/citizen_id"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white"
+            android:layout_below="@+id/account_bank_info"
+            android:layout_marginTop="15dp"
+            android:id="@+id/checkbox_set_default_layout"
+            android:padding="12dp">
+
+            <CheckBox android:id="@+id/checkbox_set_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set to default source of fund"
+                android:onClick="onCheckboxClicked"
+                android:padding="5dp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/checkbox_set_default_layout">
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"/>
+
+            <Button
+                android:id="@+id/btn_next_AddBankAccount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="NEXT"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_selector_test"
+                android:textSize="16dp" />
+        </LinearLayout>
+    </RelativeLayout>
+</FrameLayout>

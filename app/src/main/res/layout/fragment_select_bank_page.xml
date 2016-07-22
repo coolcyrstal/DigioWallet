@@ -10,7 +10,7 @@
         android:background="@android:color/white">
 
         <TextView
-            android:textColor="#999"
+            android:textColor="@color/gray_text"
             android:id="@+id/text_select_bank"
             android:gravity="center_horizontal"
             android:padding="20dp"
@@ -47,10 +47,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_scb"
                         android:src="@drawable/ic_scb" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="SCB"
                         android:textSize="20dp"
@@ -68,10 +69,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_bbl"
                         android:src="@drawable/ic_bbl" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="BBL"
                         android:textSize="20dp"
@@ -89,10 +91,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_ktb"
                         android:src="@drawable/ic_ktb" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="KTB"
                         android:textSize="20dp"
@@ -110,10 +113,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_kbank"
                         android:src="@drawable/ic_kbank" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="KBANK"
                         android:textSize="20dp"
@@ -141,10 +145,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_krungsri"
                         android:src="@drawable/ic_krungsri" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="KRUNGSRI"
                         android:textSize="20dp"
@@ -162,10 +167,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_tbank"
                         android:src="@drawable/ic_tbank" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="TBANK"
                         android:textSize="20dp"
@@ -183,10 +189,11 @@
                         android:layout_height="wrap_content"
                         android:padding="10dp"
                         android:scaleType="centerCrop"
+                        android:id="@+id/selected_digio"
                         android:src="@drawable/ic_digio" />
 
                     <TextView
-                        android:textColor="#000"
+                        android:textColor="@color/grey_text_bank"
                         android:gravity="center_horizontal"
                         android:text="DIGIO"
                         android:textSize="20dp"

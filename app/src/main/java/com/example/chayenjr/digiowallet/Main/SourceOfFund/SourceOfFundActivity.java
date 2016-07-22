@@ -1,5 +1,7 @@
 package com.example.chayenjr.digiowallet.Main.SourceOfFund;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
@@ -15,9 +17,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.R;
+import com.example.chayenjr.digiowallet.Service.HttpService;
 
-public class SourceOfFundActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class SourceOfFundActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
+        PinConfirmAddBank.pinCodeListener,
+        SelectBankPage.selectBankListener{
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -69,7 +79,7 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
         super.onCreateContextMenu(menu, v, menuInfo);
         Log.d("context menu", "active");
-        menu.setHeaderTitle("Select Type2");
+        menu.setHeaderTitle("Select Type");
         menu.add(0, v.getId(), 0, "Add Bank Account");
         menu.add(0, v.getId(), 0, "Add Credit Card");
     }
@@ -144,5 +154,87 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClickCreateAccBank() {
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.source_of_fund_contentContainer);
+
+            if (fragment instanceof BankAccountInfo == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.source_of_fund_contentContainer, BankAccountInfo.newInstance())
+                        .commit();
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+        }
+    }
+
+    @Override
+    public void onClickCreateAccBankWithWebtext() {
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.source_of_fund_contentContainer);
+
+            if (fragment instanceof BankAccountInfo == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.source_of_fund_contentContainer, BankAccountInfo.newInstance())
+                        .commit();
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+        }
+    }
+
+    @Override
+    public void pinCodeSuccessBankAcc() {
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.source_of_fund_contentContainer);
+
+            if (fragment instanceof SuccessAddBankAcc == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.source_of_fund_contentContainer, SuccessAddBankAcc.newInstance())
+                        .commit();
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+        }
+    }
+
+    private void call_checkToken(){
+        Call<HttpService.HttpBinResponse> call_checktoken = HttpService.service.postWithFormJson_checkToken(
+                LoginRegister.check_token,
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce());
+
+        call_checktoken.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){LoginRegister.check_status_login = true;}
+                else {LoginRegister.check_status_login = false;}
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private AlertDialog checkStatusOnLogin(final AppCompatActivity act, CharSequence title,
+                                           CharSequence message, CharSequence buttonYes){
+        AlertDialog.Builder downloadDialog = new AlertDialog.Builder(act);
+        downloadDialog.setTitle(title).setMessage(message).setPositiveButton(buttonYes, new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        return downloadDialog.show();
     }
 }

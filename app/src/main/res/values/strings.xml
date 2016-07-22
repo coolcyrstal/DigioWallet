@@ -32,10 +32,12 @@
     <string name="tbank">Thanachart Bank</string>
     <string name="bbl">Bangkok Bank</string>
     <string name="digio">Digio Bank</string>
+
     <string name="to_account_no">To Account No</string>
     <string name="amount">Amount</string>
     <string name="next">Next</string>
     <string name="note">Note</string>
     <string name="action_new">New Note</string>
+    <string name="account_no">Account No</string>
 
 </resources>
