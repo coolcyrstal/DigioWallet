@@ -65,32 +65,34 @@ public class SelectBankPage extends Fragment {
     }
 
     private void onClickBank(){
-        select_bankImage_scb.setOnClickListener(getButtonOnClickListenerWithNormal());
-        select_bankImage_bbl.setOnClickListener(getButtonOnClickListenerWithNormal());
-        select_bankImage_ktb.setOnClickListener(getButtonOnClickListenerWithNormal());
-        select_bankImage_kbank.setOnClickListener(getButtonOnClickListenerWithNormal());
-        select_bankImage_digio.setOnClickListener(getButtonOnClickListenerWithNormal());
+        select_bankImage_scb.setOnClickListener(getButtonOnClickListenerWithNormal(0));
+        select_bankImage_bbl.setOnClickListener(getButtonOnClickListenerWithNormal(1));
+        select_bankImage_ktb.setOnClickListener(getButtonOnClickListenerWithNormal(2));
+        select_bankImage_kbank.setOnClickListener(getButtonOnClickListenerWithNormal(3));
+        select_bankImage_digio.setOnClickListener(getButtonOnClickListenerWithNormal(6));
 
-        select_bankImage_krungsri.setOnClickListener(getButtonOnClickListenerWithWebtext());
-        select_bankImage_tbank.setOnClickListener(getButtonOnClickListenerWithWebtext());
+        select_bankImage_krungsri.setOnClickListener(getButtonOnClickListenerWithWebtext(4));
+        select_bankImage_tbank.setOnClickListener(getButtonOnClickListenerWithWebtext(5));
     }
 
-    private View.OnClickListener getButtonOnClickListenerWithNormal() {
+    private View.OnClickListener getButtonOnClickListenerWithNormal(final int bank_image_id) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectBankListener listener = (selectBankListener) getActivity();
                 listener.onClickCreateAccBank();
+                BankAccountInfo.bank_image_id = bank_image_id;
             }
         };
     }
 
-    private View.OnClickListener getButtonOnClickListenerWithWebtext() {
+    private View.OnClickListener getButtonOnClickListenerWithWebtext(final int bank_image_id) {
         return new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 selectBankListener listener = (selectBankListener) getActivity();
                 listener.onClickCreateAccBankWithWebtext();
+                BankAccountInfo.bank_image_id = bank_image_id;
             }
         };
     }

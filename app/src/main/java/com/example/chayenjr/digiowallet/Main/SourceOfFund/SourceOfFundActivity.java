@@ -27,7 +27,9 @@ import retrofit2.Response;
 
 public class SourceOfFundActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,
         PinConfirmAddBank.pinCodeListener,
-        SelectBankPage.selectBankListener{
+        SelectBankPage.selectBankListener,
+        BankAccountInfo.bankAccInfoListener,
+        SuccessAddBankAcc.addSuccessListener{
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
@@ -191,6 +193,23 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
     }
 
     @Override
+    public void onClickGoPinConfirm() {
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            Fragment fragment = getSupportFragmentManager()
+                    .findFragmentById(R.id.source_of_fund_contentContainer);
+
+            if (fragment instanceof PinConfirmAddBank == false) {
+                getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.source_of_fund_contentContainer, PinConfirmAddBank.newInstance())
+                        .commit();
+            }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+        }
+    }
+
+    @Override
     public void pinCodeSuccessBankAcc() {
         call_checkToken();
         if(LoginRegister.check_status_login){
@@ -202,6 +221,16 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
                         .replace(R.id.source_of_fund_contentContainer, SuccessAddBankAcc.newInstance())
                         .commit();
             }
+        }else{
+            checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
+        }
+    }
+
+    @Override
+    public void onClickCreateAccBankSuccess() {
+        call_checkToken();
+        if(LoginRegister.check_status_login){
+            finish();
         }else{
             checkStatusOnLogin((AppCompatActivity) getApplicationContext(), "You are not login", "Your app run overtime.", "OK");
         }

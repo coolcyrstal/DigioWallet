@@ -15,11 +15,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:scaleType="centerCrop"
-            android:id="@+id/digio_banner"
+            android:id="@+id/bank_banner"
             android:src="@drawable/digio_banner" />
 
         <LinearLayout
-            android:layout_below="@+id/digio_banner"
+            android:layout_below="@+id/bank_banner"
             android:layout_marginTop="15dp"
             android:id="@+id/account_bank_info"
             android:layout_width="match_parent"
@@ -61,11 +61,11 @@
             android:id="@+id/checkbox_set_default_layout"
             android:padding="12dp">
 
-            <CheckBox android:id="@+id/checkbox_set_default"
+            <android.support.v7.widget.AppCompatCheckBox
+                android:id="@+id/checkbox_set_default"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Set to default source of fund"
-                android:onClick="onCheckboxClicked"
                 android:padding="5dp"/>
         </LinearLayout>
 

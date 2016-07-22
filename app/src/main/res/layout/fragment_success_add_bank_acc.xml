@@ -4,5 +4,45 @@
     android:layout_height="match_parent"
     tools:context="com.example.chayenjr.digiowallet.Main.SourceOfFund.SuccessAddBankAcc">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFF"
+        android:layout_gravity="center_horizontal">
 
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:layout_marginTop="40dp"
+            android:id="@+id/icon_addsuccess"
+            android:layout_below="@+id/banner"
+            android:src="@drawable/icon_registersuccess"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/icon_addsuccess"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Congratulations ! \n Add bank account success."
+            android:textSize="16dp"
+            android:padding="10dp"
+            android:id="@+id/text_regissuccess"
+            android:textColor="#000"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:textAlignment="center"/>
+
+        <Button
+            android:id="@+id/btnDoneAddBankAcc"
+            android:layout_width="150dp"
+            android:layout_height="40dp"
+            android:layout_below="@+id/text_regissuccess"
+            android:text="DONE"
+            android:background="#fb4f9f"
+            android:layout_centerHorizontal="true"
+            android:textColor="#ffffff" />
+    </RelativeLayout>
 </FrameLayout>
