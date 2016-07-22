@@ -1,15 +1,26 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.chayenjr.digiowallet.R;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.Date;
 
 
 /**
@@ -32,7 +43,6 @@ public class TransferSuccessFragment extends Fragment {
     TextView to_accountNumber_forsendslip;
     TextView from_accountNumber_forsendslip;
     TextView dateTime_forsendslip;
-
 
     public TransferSuccessFragment() {
         super();
@@ -69,7 +79,7 @@ public class TransferSuccessFragment extends Fragment {
     }
 
     @SuppressWarnings("UnusedParameters")
-    private void initInstances(View rootView, Bundle savedInstanceState) {
+    private void initInstances(final View rootView, Bundle savedInstanceState) {
         // Init 'View' instance(s) with rootView.findViewById here
         btnDone = (Button) rootView.findViewById(R.id.btnDone);
         btnDone.setOnClickListener(new View.OnClickListener() {
@@ -77,6 +87,7 @@ public class TransferSuccessFragment extends Fragment {
             public void onClick(View v) {
                 OnFragmentListener listener = (OnFragmentListener) getActivity();
                 listener.setOnClickDoneButtonListener();
+                addToGallery(rootView);
             }
         });
         dateTime_forsendslip = (TextView)rootView.findViewById(R.id.dateTime_forsendslip);
@@ -98,6 +109,29 @@ public class TransferSuccessFragment extends Fragment {
         amountFee_forsendslip.setText(ConfirmTransferFragment.money_fee);
         amountTotal_forsendslip.setText(ConfirmTransferFragment.money_total);
         textnote_forsendslip.setText(TransferInfoFragment.text_note_description);
+    }
+
+    private void addToGallery(View rootview){
+        View v = rootview.findViewById(R.id.save_image_togallery);
+        v.setDrawingCacheEnabled(true);
+        Bitmap bm = Bitmap.createBitmap(
+                v.getDrawingCache());
+        v.setDrawingCacheEnabled(false);
+
+        try {
+            Date d = new Date();
+            String filename  = (String) DateFormat.format("kkmmss-MMddyyyy", d.getTime());
+            File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "/DigioWallet/" + filename + ".jpg");
+            FileOutputStream out = new FileOutputStream(dir);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
+            out.write(bos.toByteArray());
+            Toast.makeText(getActivity().getApplicationContext(), "Save slip", Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

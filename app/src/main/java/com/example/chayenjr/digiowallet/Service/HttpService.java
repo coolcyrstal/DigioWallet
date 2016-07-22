@@ -30,7 +30,7 @@ import retrofit2.http.Query;
  * Created by Chayenjr on 6/7/2559.
  */
 public class HttpService {
-    public static final String API_URL = "http://192.168.1.40:3300/service/";
+    public static final String API_URL = "http://uat-uniwalletserver.digio.co.th:3300/service/";
     public static HttpService instance = null;
     private static Map<String, String> headers = new HashMap<String, String>();
     public static HttpBinService service;
