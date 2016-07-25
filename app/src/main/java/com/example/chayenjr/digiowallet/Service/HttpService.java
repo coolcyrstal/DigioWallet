@@ -2,6 +2,7 @@ package com.example.chayenjr.digiowallet.Service;
 
 import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
 import com.example.chayenjr.digiowallet.Main.manager.LoginDetails;
+import com.example.chayenjr.digiowallet.Main.view.TransactionDetails;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -30,7 +31,7 @@ import retrofit2.http.Query;
  * Created by Chayenjr on 6/7/2559.
  */
 public class HttpService {
-    public static final String API_URL = "http://uat-uniwalletserver.digio.co.th:3300/service/";
+    public static final String API_URL = "http://192.168.1.31:3300/service/";
     public static HttpService instance = null;
     private static Map<String, String> headers = new HashMap<String, String>();
     public static HttpBinService service;
@@ -54,6 +55,7 @@ public class HttpService {
         @SerializedName("account_details") private AccountDetails accountDetails;
         @SerializedName("datetime") private String datetime;
         @SerializedName("Default_account") private String default_account;
+        @SerializedName("transaction_details") private TransactionDetails transactionDetails;
 
 
         public Boolean getSuccess() {
@@ -102,6 +104,14 @@ public class HttpService {
 
         public String getDefault_account() {
             return default_account;
+        }
+
+        public TransactionDetails getTransactionDetails() {
+            return transactionDetails;
+        }
+
+        public void setTransactionDetails(TransactionDetails transactionDetails) {
+            this.transactionDetails = transactionDetails;
         }
     }
 
@@ -248,6 +258,21 @@ public class HttpService {
                 @Field("amount") String amount,
                 @Field("versions") String versions,
                 @Field("nonce") String nonce
+        );
+
+        //mobile service doc 12
+        @FormUrlEncoded
+        @POST("mobile_getTransactions")
+        Call<HttpBinResponse> postWithFormJson_getTransactions(
+                @Field("token") String token,
+                @Field("mobile") String mobile,
+                @Field("versions") String versions,
+                @Field("nonce") String nonce,
+                @Field("type") String type,
+                @Field("ref") String ref,
+                @Field("Acc_no") String Acc_no,
+                @Field("datefrom") String datefrom,
+                @Field("dateto") String dateto
         );
 
         //mobile service doc 13

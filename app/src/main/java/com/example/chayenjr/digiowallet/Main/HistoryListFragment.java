@@ -1,7 +1,6 @@
 package com.example.chayenjr.digiowallet.Main;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,23 +8,29 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.example.chayenjr.digiowallet.Main.manager.HistoryListAdapter;
+import com.example.chayenjr.digiowallet.Main.view.TransactionDetails;
 import com.example.chayenjr.digiowallet.R;
 
 
 /**
  * Created by nuuneoi on 11/16/2014.
  */
-@SuppressWarnings("unused")
 public class HistoryListFragment extends Fragment {
 
     private ListView historyList;
     private HistoryListAdapter historyListAdapater;
+    TransactionDetails transactionDetails;
+
+    String[] temp_info;
+    String[] temp_date;
+    String[] temp_amount;
+    int size;
 
     public HistoryListFragment() {
         super();
     }
 
-    @SuppressWarnings("unused")
+
     public static HistoryListFragment newInstance() {
         HistoryListFragment fragment = new HistoryListFragment();
         Bundle args = new Bundle();
@@ -34,7 +39,7 @@ public class HistoryListFragment extends Fragment {
     }
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init(savedInstanceState);
 
@@ -54,11 +59,11 @@ public class HistoryListFragment extends Fragment {
         // Init Fragment level's variable(s) here
     }
 
-    @SuppressWarnings("UnusedParameters")
     private void initInstances(View rootView, Bundle savedInstanceState) {
         // Init 'View' instance(s) with rootView.findViewById here
         historyList = (ListView) rootView.findViewById(R.id.historyList);
         historyListAdapater = new HistoryListAdapter();
+        set_TransactionDetail();
         historyList.setAdapter(historyListAdapater);
     }
 
@@ -84,9 +89,29 @@ public class HistoryListFragment extends Fragment {
     /*
      * Restore Instance State Here
      */
-    @SuppressWarnings("UnusedParameters")
+
     private void onRestoreInstanceState(Bundle savedInstanceState) {
         // Restore Instance State here
     }
 
+
+
+    private void set_TransactionDetail(){
+        int i = 0;
+//        Log.d("test", ""+ HomePage.transactionDetails.getCustomer());
+//        Log.d("amount test", "" + transactionDetails.getCustomer());
+        temp_info = new String[HomePage.transactionDetails.getLogpost().size()];
+        temp_date = new String[HomePage.transactionDetails.getLogpost().size()];
+        temp_amount = new String[HomePage.transactionDetails.getLogpost().size()];
+        while(i < HomePage.transactionDetails.getLogpost().size()){
+            temp_info[i] = "Transfer to " + HomePage.transactionDetails.getLogpost().get(i).getReceiver();
+            temp_date[i] = HomePage.transactionDetails.getLogpost().get(i).getDatetime().split(" GMT")[0];
+            temp_amount[i] = "-" + HomePage.transactionDetails.getLogpost().get(i).getAmount();
+            i++;
+        }
+        historyListAdapater.setSize(HomePage.transactionDetails.getLogpost().size());
+        historyListAdapater.setLogpostInfo(temp_info);
+        historyListAdapater.setLogpost_date(temp_date);
+        historyListAdapater.setLogpost_amount(temp_amount);
+    }
 }

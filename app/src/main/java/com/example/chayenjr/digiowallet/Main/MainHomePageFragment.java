@@ -85,7 +85,8 @@ public class MainHomePageFragment extends Fragment {
         call_checktoken.enqueue(new Callback<HttpService.HttpBinResponse>() {
             @Override
             public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
-                if(response.body().getSuccess()){}else {LoginRegister.check_status_login = false;}
+                if(response.body().getSuccess()){LoginRegister.check_status_login = true;}
+                else {LoginRegister.check_status_login = false;}
             }
 
             @Override

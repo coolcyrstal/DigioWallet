@@ -40,8 +40,8 @@
         android:layout_height="wrap_content"
         android:paddingRight="16dp"
         android:paddingTop="16dp"
-        android:text="+200.00"
-        android:textColor="@android:color/holo_green_dark" />
+        android:text="-200.00"
+        android:textColor="@android:color/holo_red_dark" />
 
 
 

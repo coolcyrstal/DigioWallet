@@ -100,10 +100,10 @@ public class HistoryView extends BaseCustomViewGroup {
     }
 
     public void setTextDateTransfer(String s){
-        textInfoTransfer.setText(s);
+        textDateTransfer.setText(s);
     }
 
     public void setTextCountTransfer(String s){
-        textInfoTransfer.setText(s);
+        textCountTransfer.setText(s);
     }
 }

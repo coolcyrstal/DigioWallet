@@ -24,6 +24,7 @@ import android.widget.TextView;
 import com.example.chayenjr.digiowallet.LoginRegister;
 import com.example.chayenjr.digiowallet.Main.SourceOfFund.SourceOfFundActivity;
 import com.example.chayenjr.digiowallet.Main.manager.AccountDetails;
+import com.example.chayenjr.digiowallet.Main.view.TransactionDetails;
 import com.example.chayenjr.digiowallet.R;
 import com.example.chayenjr.digiowallet.Service.HttpService;
 import com.example.chayenjr.digiowallet.Tranfer.TranferActivity;
@@ -44,6 +45,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
     public static TextView usermoney;
     AppCompatTextView mTextViewName, mTextViewMoney, mTitle;
     View view;
+    public static TransactionDetails transactionDetails;
 
     ViewPager viewPager;
     private TabLayout tabLayout;
@@ -58,9 +60,10 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setContentView(R.layout.activity_home_page);
         initialize();
         call_account();
+        call_Transaction();
         setToolbar();
         setDrawer();
-        setViewPager();
+//        setViewPager();
 
     }
 
@@ -72,6 +75,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     case 0 :
                         return MainHomePageFragment.newInstance();
                     case 1 :
+//                        Log.d("test", ""+ HomePage.transactionDetails.getCustomer());
                         return HistoryListFragment.newInstance();
                     default:
                         return null;
@@ -190,6 +194,29 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
                     account_details = "0.00";
                 }
                 setAccountInfo();
+                Log.d("admin", "success");
+            }
+
+            @Override
+            public void onFailure(Call<HttpService.HttpBinResponse> call, Throwable t) {
+                Log.d("Fail", "fail");
+            }
+        });
+    }
+
+    private void call_Transaction(){
+        Call<HttpService.HttpBinResponse> call_getTransactions = HttpService.service.postWithFormJson_getTransactions(
+                LoginRegister.check_token, LoginRegister.text_mobileNum.getText().toString(),
+                HttpService.RegisterContact.getVersions(), HttpService.RegisterContact.getNonce(),
+                "", "", "", "", "");
+
+        call_getTransactions.enqueue(new Callback<HttpService.HttpBinResponse>() {
+            @Override
+            public void onResponse(Call<HttpService.HttpBinResponse> call, Response<HttpService.HttpBinResponse> response) {
+                if(response.body().getSuccess()){
+                    transactionDetails = response.body().getTransactionDetails();
+                    setViewPager();
+                }
             }
 
             @Override

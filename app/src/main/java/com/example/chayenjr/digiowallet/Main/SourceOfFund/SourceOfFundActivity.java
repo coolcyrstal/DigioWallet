@@ -84,6 +84,7 @@ public class SourceOfFundActivity extends AppCompatActivity implements Navigatio
         menu.setHeaderTitle("Select Type");
         menu.add(0, v.getId(), 0, "Add Bank Account");
         menu.add(0, v.getId(), 0, "Add Credit Card");
+//        Log.d("test", ""+ HomePage.accountDetails.getAccounts().get(0).getAvaliable_balance());
     }
 
     @Override
