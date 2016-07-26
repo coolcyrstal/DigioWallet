@@ -1,6 +1,8 @@
 package com.example.chayenjr.digiowallet.Tranfer;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
@@ -122,16 +124,27 @@ public class TransferSuccessFragment extends Fragment {
             Date d = new Date();
             String filename  = (String) DateFormat.format("kkmmss-MMddyyyy", d.getTime());
             File dir = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "/DigioWallet/" + filename + ".jpg");
+            if(!dir.exists()){
+                File directory = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES), "/DigioWallet/");
+                directory.mkdirs();
+            }
             FileOutputStream out = new FileOutputStream(dir);
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bm.compress(Bitmap.CompressFormat.JPEG, 100, bos);
             out.write(bos.toByteArray());
+            updateImage(dir);
             Toast.makeText(getActivity().getApplicationContext(), "Save slip", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }  catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void updateImage(File f) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(f));
+        getActivity().sendBroadcast(intent);
     }
 
     @Override

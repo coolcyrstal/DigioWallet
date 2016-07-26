@@ -223,15 +223,15 @@
                 android:padding="12dp"
                 android:text="DescriptionDescriptionDescription" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1" />
-
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/slip"/>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
 
             <TextView
                 android:layout_marginTop="6dp"
