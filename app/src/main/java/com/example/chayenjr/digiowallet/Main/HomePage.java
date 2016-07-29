@@ -64,7 +64,6 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         setToolbar();
         setDrawer();
 //        setViewPager();
-
     }
 
     private void setViewPager() {
@@ -102,6 +101,7 @@ public class HomePage extends AppCompatActivity implements NavigationView.OnNavi
         });
 
         tabLayout.setupWithViewPager(viewPager);
+        LoginRegister.progress.setVisibility(View.INVISIBLE);
     }
 
     private void initialize() {

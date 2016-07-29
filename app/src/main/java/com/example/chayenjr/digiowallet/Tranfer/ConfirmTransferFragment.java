@@ -56,6 +56,7 @@ public class ConfirmTransferFragment extends Fragment {
             R.drawable.ic_scb,
             R.drawable.ic_krungsri,
             R.drawable.ic_tbank,
+            R.drawable.ic_bbl,
             R.drawable.ic_digio
     };
 

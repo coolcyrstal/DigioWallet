@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.ActionBar;
@@ -13,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.example.chayenjr.digiowallet.Main.HomePage;
@@ -61,6 +63,7 @@ public class LoginRegister extends AppCompatActivity {
     public static LoginDetails account_info;
     public static Boolean check_status_login = false;
     MenuView.ItemView logout;
+    public static ProgressBar progress;
 
 
     @Override
@@ -73,6 +76,9 @@ public class LoginRegister extends AppCompatActivity {
         Button login_button = (Button)findViewById(R.id.login_button);
         text_mobileNum = (EditText)findViewById(R.id.textMobileNum);
         text_PIN = (EditText)findViewById(R.id.textPIN);
+        progress = (ProgressBar)findViewById(R.id.progressBar);
+        Drawable draw = getResources().getDrawable(R.drawable.custom_progressbar);
+        progress.setProgressDrawable(draw);
 
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor();
 
@@ -120,6 +126,7 @@ public class LoginRegister extends AppCompatActivity {
                     check_token = response.body().getToken();
                     account_info = response.body().getDetails();
                     check_status_login = true;
+                    progress.setVisibility(View.VISIBLE);
                     Intent intent = new Intent(LoginRegister.this, HomePage.class);
                     startActivity(intent);
                 } else{
